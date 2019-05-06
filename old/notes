@@ -1,0 +1,68 @@
+%
+
+21$		specifies the next argument to access
+
+	To be processed by printf:
+0		zero padding
+or -	negative field width (right padding)
+	To be processed by sub functions:
+#		alternate way of processing certain types
+(space)	space preceeds numbers
+or +	sign preceeds numbers
+'		separate by thousands
+		just return size, don't write (returns NOPAD if the field should not be padded)
+
+Flags char format: 1'+_ #-0w
+
+321		minimum field width
+*		minimum filed with as arg (negative = negative field width flag)
+*4$		minimum field width as numbered arg
+
+.		zero precision
+.21		precision
+.*		precision as arg (negative value ignored)
+.*4$	precision as numbered arg
+
+hh
+h
+1
+11
+
+c		unsigned char
+d		signed decimal
+e		double (exponent)
+f		double
+g		double (chooses e or f based on exponent)
+EFG
+i		signed decimal
+o		octal
+p		pointer (identical to %#x)
+s		string
+u		unsigned decimal
+x		hexadecimal (0123456789abcdef)
+X
+
+C		wide char
+S		wide string
+
+return the number of characters printed or -1 on error
+
+
+(*f)(void *, int, int, int);
+function(data, flags, field width, precision);
+
+
+
+
+
+
+
+
+
+
+
+first pass: break the string up into a linked list of printables
+second pass: record access args and non access args; if there is a mix, return -1
+	if we have a complete set of access args, go through va_list and begin assigning actual values
+third pass: print the printables
+
