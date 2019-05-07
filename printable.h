@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:52:38 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/06 14:53:32 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:26:52 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_printable
 	int			field_width;
 	int			precision_arg;
 	int			precision;
+	char		modifier;
 	char		type;
 	int			data_arg;
 	void		*data;

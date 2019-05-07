@@ -6,35 +6,16 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/06 16:33:44 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/06 19:46:14 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	pop_number(const char **format)
+static int	pop_number(const char **format, BOOL arg_number)
 {
-	long num;
-
-	num = 0;
-	while (**format >= '0' && **format <= '9')
-	{
-		if (num < 2147483648)
-		{
-			num *= 10;
-			num += **format - '0';
-		}
-		*format = *format + 1;
-	}
-	if (num > 2147483648)
-		return (0);
-	return (num);
-}
-
-static int	pop_arg_number(const char **format)
-{
-	long num;
-	const char *str;
+	long		num;
+	const char	*str;
 
 	num = 0;
 	str = *format;
@@ -47,20 +28,16 @@ static int	pop_arg_number(const char **format)
 		}
 		str++;
 	}
-	if (*str != '$')
+	if (arg_number && (*str != '$'))
 		return (0);
-	*format = str + 1;
+	if (arg_number)
+		*format = str + 1;
+	else
+		*format = str;
 	if (num > 2147483648)
 		return (0);
 	return (num);
 }
-
-# define ALTFORM 0x01
-# define ZEROPAD 0x02
-# define RIGHTPAD 0x04
-# define SIGNSPACE 0x08
-# define SIGNFORCE 0x10
-# define DELIMITERS 0x20
 
 static int	pop_flags(const char **format)
 {
@@ -87,44 +64,67 @@ static int	pop_flags(const char **format)
 	}
 }
 
-static void	pop_all_the_rest(const char **format, t_printable *p)
+static void	pop_width_and_precision(const char **format, t_printable *p)
 {
 	if (**format == '*')
 	{
 		*format = *format + 1;
-		p->field_width_arg = pop_arg_number(format);
+		p->field_width_arg = pop_number(format, ARG);
 	}
 	else
-		p->field_width = pop_number(format);
+		p->field_width = pop_number(format, NOT_ARG);
 	if (**format == '.')
 	{
 		*format = *format + 1;
 		if (**format == '*')
 		{
 			*format = *format + 1;
-			p->precision_arg = pop_arg_number(format);
+			p->precision_arg = pop_number(format, ARG);
 		}
 		else
-			p->precision = pop_number(format);
+			p->precision = pop_number(format, NOT_ARG);
 	}
-	// TODO p->modifier = pop_modifier(format);
-	while ((**format == 'h') || (**format == 'l'))
-		*format = *format + 1;
 }
 
-int		read_placeholder(const char **format, t_list *printables)
+static char	pop_modifier(const char **format)
 {
-	t_list *elem;
-	t_printable *p;
+	if (**format == 'h')
+	{
+		*format = *format + 1;
+		if (**format == 'h')
+		{
+			*format = *format + 1;
+			return (0);
+		}
+		return (0);
+	}
+	else if (**format == 'l')
+	{
+		*format = *format + 1;
+		if (**format == 'l')
+		{
+			*format = *format + 1;
+			return (0);
+		}
+		return (0);
+	}
+	return (0);
+}
+
+int			read_placeholder(const char **format, t_list *printables)
+{
+	t_list		*elem;
+	t_printable	*p;
 
 	elem = new_printable();
 	if (elem == NULL)
 		return (-1);
 	p = (t_printable *)elem->content;
 	*format = *format + 1;
-	p->data_arg = pop_arg_number(format);
+	p->data_arg = pop_number(format, ARG);
 	p->flags = pop_flags(format);
-	pop_all_the_rest(format, p);
+	pop_width_and_precision(format, p);
+	p->modifier = pop_modifier(format);
 	p->type = **format;
 	*format = *format + 1;
 	ft_lstappend(printables, elem);
