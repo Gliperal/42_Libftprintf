@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   extract_args.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 16:04:26 by nwhitlow         ###   ########.fr       */
+/*   Created: 2019/05/07 08:27:34 by nwhitlow          #+#    #+#             */
+/*   Updated: 2019/05/08 13:53:59 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef EXTRACT_ARGS_H
+# define EXTRACT_ARGS_H
 
-// TODO into header files
-#include <stdarg.h>
-void		extract_args(t_list *printables, va_list *ap);
-t_list	*read_format_string(const char *format);
+# define ARGTYPE char
+# define TYPE_CHAR 0
+# define TYPE_SHORT 1
+# define TYPE_INT 2
+# define TYPE_LONG 3
+# define TYPE_LONGLONG 4
+# define TYPE_STR 5
 
-int	ft_printf(const char *format, ...)
+typedef struct	s_argument
 {
-	t_list *printables;
+	int			index;
+	ARGTYPE		type;
+	void		*data;
+}				t_argument;
 
-	printables = read_format_string(format);
-	extract_args(printables, 0);
-	return (0);
-}
+typedef struct	s_arglist
+{
+	int			size;
+	t_argument	**args;
+}				t_arglist;
+
+#endif
