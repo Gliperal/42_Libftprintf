@@ -16,10 +16,8 @@ int	main()
 {
 	t_list *printables;
 
-/*	printables = read_format_string("hello%2$+.*1$dworld%3$+.*1$c\n");
-	ft_lstiter(printables, &put_printable);
-	extract_args(printables, 0);*/
-	test("hello%+.4cworld%+.10c\n");
+	test("hello%2$+.*1$cworld%3$+.*1$c\n", 8, 'a', 'b');
+//	test("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
 
 	return (0);
 

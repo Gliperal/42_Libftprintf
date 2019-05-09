@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 11:47:28 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:35:11 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 typedef void	*(*t_reader)(va_list);
 typedef ARGSIZE	(*t_sizer)(char modifier);
 typedef char	*(*t_formatter)(void *);
+
+#include "dispatchers.h"
 
 typedef struct	s_type_reader
 {

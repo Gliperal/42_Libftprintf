@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 20:54:55 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:04:32 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdarg.h>
-#include "extract_args.h"
 
 // Two potential memory leaks due to not freeing the argument array
 static int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
@@ -47,19 +46,6 @@ static int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
 	arg->type = type;
 	arg->data = NULL;
 	return (1);
-}
-
-// TODO Use a dispatcher for the type to type conversion
-static int			set_arg_type2(t_arglist *arglist, int index, char type, char modifier)
-{
-	if (modifier)
-		return (set_arg_type(arglist, index, modifier - 1));
-	else if (type == 's')
-		return (set_arg_type(arglist, index, SIZE_STR));
-	else if (type == 'c')
-		return (set_arg_type(arglist, index, SIZE_CHAR));
-	else
-		return (set_arg_type(arglist, index, SIZE_INT));
 }
 
 static t_arglist	*new_arglist()
@@ -94,7 +80,7 @@ static t_arglist	*get_arg_types(t_list *printables)
 				if (!set_arg_type(arglist, p->precision_arg, SIZE_INT))
 					return (NULL);
 			if (p->data_arg != -1)
-				if (!set_arg_type2(arglist, p->data_arg, p->type, p->modifier))
+				if (!set_arg_type(arglist, p->data_arg, size_of_type(p->type, p->modifier)))
 					return (NULL);
 		}
 		printables = printables->next;
@@ -102,24 +88,62 @@ static t_arglist	*get_arg_types(t_list *printables)
 	return (arglist);
 }
 
+int		withdraw_args(t_arglist *arglist, va_list ap)
+{
+	int i;
+
+	i = 0;
+	while (i < arglist->size)
+	{
+		t_argument *arg = arglist->args[i];
+		t_reader reader = reader_for_size(arg->type);
+		if (reader == NULL)
+			return (0);
+		arg->data = (*reader)(ap);
+		i++;
+	}
+	return (1);
+}
+
+void	inject_args(t_list *printables, t_arglist *arglist)
+{
+	t_printable	*p;
+	t_argument	*arg;
+
+	while (printables)
+	{
+		p = (t_printable *)printables->content;
+		if (p)
+		{
+			if (p->field_width_arg != -1)
+			{
+				arg = arglist->args[p->field_width_arg - 1];
+				p->field_width = *((int *)arg->data);
+			}
+			if (p->precision_arg != -1)
+			{
+				arg = arglist->args[p->precision_arg - 1];
+				p->precision = *((int *)arg->data);
+			}
+			if (p->data_arg != -1)
+			{
+				arg = arglist->args[p->data_arg - 1];
+				p->data = arg->data;
+			}
+		}
+		printables = printables->next;
+	}
+}
+
 int		extract_positional_args(t_list *printables, va_list ap)
 {
 	t_arglist *arglist;
 
-	arglist = get_arg_types(printables); // make a list of arg types
+	arglist = get_arg_types(printables);
 	if (arglist == NULL)
 		return (-1);
-	printf("Arglist(%d)\n", arglist->size);
-	for (int i = 0; i < arglist->size; i++)
-	{
-		t_argument *arg = arglist->args[i];
-		if (arg == NULL)
-			printf("\t(NULL)\n");
-		else
-			printf("\ttype %d, data %p\n", arg->type, arg->data);
-	}
-	printf("/Arglist\n");
-//	withdraw_args(); // use those arg types to get them out of the va_list
-//	inject_args(); // iterate through the printable list and update with the appropriate args
+	if (!withdraw_args(arglist, ap))
+		return (-1);
+	inject_args(printables, arglist);
 	return (-1);
 }

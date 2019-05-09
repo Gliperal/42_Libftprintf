@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 11:19:06 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:22:14 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void put_printable(t_list *printable)
 		printf("\ttype\t\t%c\n", p->type);
 		printf("\tdata_arg\t%d\n", p->data_arg);
 		printf("\tdata\t\t%p\n", p->data);
+		if ((p->type == 'c') && p->data)
+		{
+			char *c = p->data;
+			printf("\tdata\t\t%c\n", *c);
+		}
 	}
 	printf("/Printable\n");
 }
