@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:30:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 12:47:12 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 13:19:49 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_reader	reader_for_size(ARGSIZE size)
 		i++;
 	}
 	return (NULL);
-
 }
 
 t_reader	reader_for_type(char type, char modifier)
@@ -57,4 +56,18 @@ t_reader	reader_for_type(char type, char modifier)
 	if (size == 0)
 		return (NULL);
 	return (reader_for_size(size));
+}
+
+t_formatter	formatter_for_type(char type)
+{
+	int	i;
+
+	i = 0;
+	while (g_type_formatters[i].type != 0)
+	{
+		if (g_type_formatters[i].type == type)
+			return (g_type_formatters[i].formatter);
+		i++;
+	}
+	return (NULL);
 }

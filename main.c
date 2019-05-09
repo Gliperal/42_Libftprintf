@@ -20,9 +20,4 @@ int	main()
 //	test("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
 
 	return (0);
-
-
-
-	// all the cases from the other tests
-	// strings with a null terminator in the middle (use precision)
 }
