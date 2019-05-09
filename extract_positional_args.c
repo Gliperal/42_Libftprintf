@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 19:33:29 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/08 20:54:55 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "extract_args.h"
 
 // Two potential memory leaks due to not freeing the argument array
-static int			set_arg_type(t_arglist *arglist, int index, ARGTYPE type)
+static int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
 {
 	t_argument **tmp;
 	t_argument *arg;
@@ -55,11 +55,11 @@ static int			set_arg_type2(t_arglist *arglist, int index, char type, char modifi
 	if (modifier)
 		return (set_arg_type(arglist, index, modifier - 1));
 	else if (type == 's')
-		return (set_arg_type(arglist, index, TYPE_STR));
+		return (set_arg_type(arglist, index, SIZE_STR));
 	else if (type == 'c')
-		return (set_arg_type(arglist, index, TYPE_CHAR));
+		return (set_arg_type(arglist, index, SIZE_CHAR));
 	else
-		return (set_arg_type(arglist, index, TYPE_INT));
+		return (set_arg_type(arglist, index, SIZE_INT));
 }
 
 static t_arglist	*new_arglist()
@@ -88,10 +88,10 @@ static t_arglist	*get_arg_types(t_list *printables)
 		if (p)
 		{
 			if (p->field_width_arg != -1)
-				if (!set_arg_type(arglist, p->field_width_arg, TYPE_INT))
+				if (!set_arg_type(arglist, p->field_width_arg, SIZE_INT))
 					return (NULL);
 			if (p->precision_arg != -1)
-				if (!set_arg_type(arglist, p->precision_arg, TYPE_INT))
+				if (!set_arg_type(arglist, p->precision_arg, SIZE_INT))
 					return (NULL);
 			if (p->data_arg != -1)
 				if (!set_arg_type2(arglist, p->data_arg, p->type, p->modifier))
@@ -102,7 +102,7 @@ static t_arglist	*get_arg_types(t_list *printables)
 	return (arglist);
 }
 
-int		extract_positional_args(t_list *printables, va_list *ap)
+int		extract_positional_args(t_list *printables, va_list ap)
 {
 	t_arglist *arglist;
 

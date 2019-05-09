@@ -6,17 +6,19 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 19:43:19 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/08 21:43:07 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+// TODO Remove
+#include <stdio.h>
 
 static int	positional_args(t_list *printables)
 {
-	t_printable *p;
-	int arg_style;
-	int tmp;
+	t_printable	*p;
+	int			arg_style;
+	int			tmp;
 
 	tmp = -1;
 	arg_style = -1;
@@ -41,15 +43,68 @@ static int	positional_args(t_list *printables)
 	return (arg_style);
 }
 
-static int	retrieve_arg_data()
+static ARGSIZE	size_of_type(char type)
 {
-	// Get the non-positional args out of va_list in order
-	return (-1);
+	int i;
+
+	i = 0;
+	while (g_type_formatters[i].type != 0)
+	{
+		if (g_type_formatters[i].type == type)
+			return (g_type_formatters[i].size);
+		i++;
+	}
+	return (0);
 }
 
-int		extract_args(t_list *printables, va_list *ap)
+static t_reader	reader_for_type(char type)
 {
-	int pa;
+	ARGSIZE	size;
+	int		i;
+
+	size = size_of_type(type);
+	if (size == 0)
+		return (NULL);
+	i = 0;
+	while (g_type_readers[i].size != 0)
+	{
+		if (g_type_readers[i].size == size)
+			return (g_type_readers[i].reader);
+		i++;
+	}
+	return (NULL);
+}
+
+static int	retrieve_arg_data(t_list *printables, va_list ap)
+{
+	t_printable	*p;
+	t_reader	reader;
+
+	while (printables)
+	{
+		p = (t_printable *)printables->content;
+		if (p != 0)
+		{
+			if (p->field_width_arg == 0)
+				p->field_width = va_arg(ap, int);
+			if (p->precision_arg == 0)
+				p->precision = va_arg(ap, int);
+			if (p->data_arg == 0)
+			{
+				reader = reader_for_type(p->type);
+				if (reader == NULL)
+					return (-1);
+				p->data = (*reader)(ap);
+			}
+		}
+		printables = printables->next;
+	}
+	return (0);
+}
+
+int			extract_args(t_list *printables, va_list ap)
+{
+	int	pa;
 
 	pa = positional_args(printables);
 	if (pa == -1)
@@ -57,6 +112,6 @@ int		extract_args(t_list *printables, va_list *ap)
 	else if (pa == 1)
 		return (extract_positional_args(printables, ap));
 	else if (pa == 0)
-		return (retrieve_arg_data());
+		return (retrieve_arg_data(printables, ap));
 	return (-1);
 }
