@@ -30,5 +30,9 @@ fclean: clean
 
 re: fclean all
 
-test: re
+libft/libft.a:
+	make -C libft re
+	make -C libft clean
+
+test: re libft/libft.a
 	$(CC) main.c -I libft -L. -lftprintf -Llibft -lft -o test
