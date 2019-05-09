@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 08:27:34 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 21:23:52 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:12:15 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define SIZE_LONG 4
 # define SIZE_LONGLONG 5
 # define SIZE_STR 6
+
+# define MOD_H 1
+# define MOD_HH 2
+# define MOD_L 3
+# define MOD_LL 4
 
 typedef struct	s_argument
 {

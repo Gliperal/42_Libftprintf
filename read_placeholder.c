@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 16:27:32 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:18:32 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ static char	pop_modifier(const char **format)
 		if (**format == 'h')
 		{
 			*format = *format + 1;
-			return (0);
+			return (MOD_HH);
 		}
-		return (0);
+		return (MOD_H);
 	}
 	else if (**format == 'l')
 	{
@@ -104,9 +104,9 @@ static char	pop_modifier(const char **format)
 		if (**format == 'l')
 		{
 			*format = *format + 1;
-			return (0);
+			return (MOD_LL);
 		}
-		return (0);
+		return (MOD_L);
 	}
 	return (0);
 }

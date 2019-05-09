@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 21:43:07 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:42:28 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,26 +43,32 @@ static int	positional_args(t_list *printables)
 	return (arg_style);
 }
 
-static ARGSIZE	size_of_type(char type)
+static ARGSIZE	size_of_type(char type, char modifier)
 {
 	int i;
+	t_sizer sizer;
 
 	i = 0;
 	while (g_type_formatters[i].type != 0)
 	{
 		if (g_type_formatters[i].type == type)
-			return (g_type_formatters[i].size);
+		{
+			sizer = g_type_formatters[i].sizer;
+			if (sizer == NULL)
+				return (0);
+			return ((*sizer)(modifier));
+		}
 		i++;
 	}
 	return (0);
 }
 
-static t_reader	reader_for_type(char type)
+static t_reader	reader_for_type(char type, char modifier)
 {
 	ARGSIZE	size;
 	int		i;
 
-	size = size_of_type(type);
+	size = size_of_type(type, modifier);
 	if (size == 0)
 		return (NULL);
 	i = 0;
@@ -91,7 +97,7 @@ static int	retrieve_arg_data(t_list *printables, va_list ap)
 				p->precision = va_arg(ap, int);
 			if (p->data_arg == 0)
 			{
-				reader = reader_for_type(p->type);
+				reader = reader_for_type(p->type, p->modifier);
 				if (reader == NULL)
 					return (-1);
 				p->data = (*reader)(ap);

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/06 15:08:41 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:19:06 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void put_printable(t_list *printable)
 		printf("\tfield_width\t%d\n", p->field_width);
 		printf("\tprecision_arg\t%d\n", p->precision_arg);
 		printf("\tprecision\t%d\n", p->precision);
+		printf("\tmodifier\t%d\n", p->modifier);
 		printf("\ttype\t\t%c\n", p->type);
 		printf("\tdata_arg\t%d\n", p->data_arg);
 		printf("\tdata\t\t%p\n", p->data);
