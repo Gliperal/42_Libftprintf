@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 08:27:34 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 13:53:59 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/08 19:03:26 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 typedef struct	s_argument
 {
-	int			index;
 	ARGTYPE		type;
 	void		*data;
 }				t_argument;
