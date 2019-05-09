@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 13:04:32 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 15:37:22 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,26 @@ void	inject_args(t_list *printables, t_arglist *arglist)
 	}
 }
 
+void	free_arglist(t_arglist **arglist)
+{
+	int			i;
+	t_argument	**args;
+
+	i = 0;
+	if ((arglist == NULL) || (*arglist == NULL))
+		return ;
+	args = (*arglist)->args;
+	while (i < (*arglist)->size)
+	{
+		if (args[i])
+			free(args[i]);
+		i++;
+	}
+	free(args);
+	free(*arglist);
+	*arglist = NULL;
+}
+
 int		extract_positional_args(t_list *printables, va_list ap)
 {
 	t_arglist *arglist;
@@ -145,5 +165,6 @@ int		extract_positional_args(t_list *printables, va_list ap)
 	if (!withdraw_args(arglist, ap))
 		return (-1);
 	inject_args(printables, arglist);
+	free_arglist(&arglist);
 	return (-1);
 }
