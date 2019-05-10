@@ -34,13 +34,15 @@ static int	positional_args(t_list *printables)
 
 int		withdraw_args(t_arglist *arglist, va_list ap)
 {
-	int i;
+	int			i;
+	t_argument	*arg;
+	t_reader	reader;
 
 	i = 0;
 	while (i < arglist->size)
 	{
-		t_argument *arg = arglist->args[i];
-		t_reader reader = reader_for_size(arg->type);
+		arg = arglist->args[i];
+		reader = reader_for_size(arg->type);
 		if (reader == NULL)
 			return (0);
 		arg->data = (*reader)(ap);

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:30:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 13:19:49 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:01:36 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 ARGSIZE		size_of_type(char type, char modifier)
 {
-	int i;
-	t_sizer sizer;
+	int		i;
+	t_sizer	sizer;
 
 	i = 0;
 	while (g_type_formatters[i].type != 0)
