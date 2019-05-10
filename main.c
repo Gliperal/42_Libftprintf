@@ -32,7 +32,7 @@ static int	positional_args(t_list *printables)
 	return (arg_style);
 }
 
-int		withdraw_args(t_arglist *arglist, va_list ap)
+static int	withdraw_args(t_arglist *arglist, va_list ap)
 {
 	int			i;
 	t_argument	*arg;
@@ -96,7 +96,7 @@ static void	parse_args_positional(t_printable *p, t_arglist *arglist)
 	}
 }
 
-void	inject_args(t_list *printables, t_arglist *arglist, int positional)
+static void	inject_args(t_list *printables, t_arglist *arglist, int positional)
 {
 	t_printable	*p;
 

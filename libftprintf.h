@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 11:21:57 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:29:44 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-
 #include "libft.h"
-#include "printable.h"
-#include "arglist.h"
+#include "argsize.h"
 #include "readers.h"
 #include "sizers.h"
+
+# define MOD_H 1
+# define MOD_HH 2
+# define MOD_L 3
+# define MOD_LL 4
 
 # define BOOL char
 # define ARG 1
@@ -33,11 +36,46 @@
 # define SIGNFORCE 0x10
 # define DELIMITERS 0x20
 
+typedef struct	s_argument
+{
+	ARGSIZE		type;
+	void		*data;
+}				t_argument;
+
+typedef struct	s_arglist
+{
+	int			size;
+	t_argument	**args;
+	int			index;
+}				t_arglist;
+
+t_arglist	*new_arglist(void);
+int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type);
+void		free_arglist(t_arglist **arglist);
+t_arglist	*build_arglist(t_list *printables, int positional);
+
 typedef void	*(*t_reader)(va_list);
 typedef ARGSIZE	(*t_sizer)(char modifier);
 typedef char	*(*t_formatter)(void *);
 
-#include "dispatchers.h"
+typedef struct	s_printable
+{
+	char		flags;
+	int			field_width_arg;
+	int			field_width;
+	int			precision_arg;
+	int			precision;
+	char		modifier;
+	char		type;
+	int			data_arg;
+	void		*data;
+}				t_printable;
+
+t_list *new_printable();
+t_list	*read_format_string(const char *format);
+int	read_placeholder(const char **format, t_list *printables);
+void put_printable(t_list *printable);
+void free_printables(t_list **printables);
 
 typedef struct	s_type_reader
 {
@@ -85,12 +123,9 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {0, 0, 0}
 };
 
-t_list *new_printable();
-t_list	*read_format_string(const char *format);
-int	read_placeholder(const char **format, t_list *printables);
-int		extract_args(t_list *printables, va_list ap);
-int		extract_positional_args(t_list *printables, va_list ap);
-
-void put_printable(t_list *printable);
+ARGSIZE		size_of_type(char type, char modifier);
+t_reader	reader_for_size(ARGSIZE size);
+t_reader	reader_for_type(char type, char modifier);
+t_formatter	formatter_for_type(char type);
 
 #endif

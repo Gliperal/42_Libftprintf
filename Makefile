@@ -2,13 +2,13 @@ CC=gcc
 CFLAGS=-Wall -Wextra
 CSRC=ft_printf.c \
 	 printable.c \
+	 arglist.c build_arglist.c \
 	 read_format_string.c read_placeholder.c \
-	 arglist.c \
 	 readers.c sizers.c dispatchers.c
 OBJS=ft_printf.o \
 	 printable.o \
+	 arglist.o build_arglist.o \
 	 read_format_string.o read_placeholder.o \
-	 arglist.o \
 	 readers.o sizers.o dispatchers.o
 GCH=libftprintf.gch
 AR=ar rcs

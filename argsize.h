@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printable.h                                        :+:      :+:    :+:   */
+/*   argsize.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 11:52:38 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 11:35:10 by nwhitlow         ###   ########.fr       */
+/*   Created: 2019/05/10 12:29:01 by nwhitlow          #+#    #+#             */
+/*   Updated: 2019/05/10 12:29:21 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTABLE_H
-# define PRINTABLE_H
+#ifndef ARGSIZE_H
+# define ARGSIZE_H
 
-typedef struct	s_printable
-{
-	char		flags;
-	int			field_width_arg;
-	int			field_width;
-	int			precision_arg;
-	int			precision;
-	char		modifier;
-	char		type;
-	int			data_arg;
-	void		*data;
-}				t_printable;
-
-void free_printables(t_list **printables);
+# define ARGSIZE char
+# define SIZE_CHAR 1
+# define SIZE_SHORT 2
+# define SIZE_INT 3
+# define SIZE_LONG 4
+# define SIZE_LONGLONG 5
+# define SIZE_STR 6
 
 #endif
