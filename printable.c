@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 12:22:14 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 19:12:03 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,18 @@ t_list *new_printable()
 	return (l);
 }
 
+void free_printable(t_list *printable)
+{
+	t_printable *p;
+
+	p = printable->content;
+	if (p == NULL)
+		return ;
+	if (p->data)
+		// TODO
+	free(p);
+}
+
 // TODO Remove
 void put_printable(t_list *printable)
 {
@@ -58,7 +70,7 @@ void put_printable(t_list *printable)
 		if ((p->type == 'c') && p->data)
 		{
 			char *c = p->data;
-			printf("\tdata\t\t%c\n", *c);
+			printf("\tdata\t\t%p\n", c);
 		}
 	}
 	printf("/Printable\n");

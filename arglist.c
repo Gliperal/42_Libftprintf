@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_positional_args.c                          :+:      :+:    :+:   */
+/*   arglist.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 17:48:14 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 21:10:20 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
 		arglist->args = (t_argument **)malloc(index * sizeof(t_argument *));
 		if (arglist->args == NULL)
 			return (0);
+		ft_bzero(arglist->args, index * sizeof(t_argument *));
 		ft_memcpy(arglist->args, tmp, arglist->size * sizeof(t_argument *));
 		if (tmp)
 			free(tmp);
@@ -60,7 +61,35 @@ static t_arglist	*new_arglist()
 	return (arglist);
 }
 
-static t_arglist	*build_arglist(t_list *printables)
+static int	parse_args_positional(t_arglist *arglist, t_printable *p)
+{
+	if (p->field_width_arg != -1)
+		if (!set_arg_type(arglist, p->field_width_arg, SIZE_INT))
+			return (0);
+	if (p->precision_arg != -1)
+		if (!set_arg_type(arglist, p->precision_arg, SIZE_INT))
+			return (0);
+	if (p->data_arg != -1)
+		if (!set_arg_type(arglist, p->data_arg, size_of_type(p->type, p->modifier)))
+			return (0);
+	return (1);
+}
+
+static int	parse_args(t_arglist *arglist, t_printable *p)
+{
+	if (p->field_width_arg == 0)
+		if (!set_arg_type(arglist, arglist->size + 1, SIZE_INT))
+			return (0);
+	if (p->precision_arg == 0)
+		if (!set_arg_type(arglist, arglist->size + 1, SIZE_INT))
+			return (0);
+	if (p->data_arg == 0)
+		if (!set_arg_type(arglist, arglist->size + 1, size_of_type(p->type, p->modifier)))
+			return (0);
+	return (1);
+}
+
+t_arglist	*build_arglist(t_list *printables, int positional)
 {
 	t_arglist *arglist;
 	t_printable *p;
@@ -73,14 +102,13 @@ static t_arglist	*build_arglist(t_list *printables)
 		p = (t_printable *)printables->content;
 		if (p)
 		{
-			if (p->field_width_arg != -1)
-				if (!set_arg_type(arglist, p->field_width_arg, SIZE_INT))
+			if (positional)
+			{
+				if (!parse_args_positional(arglist, p))
 					return (NULL);
-			if (p->precision_arg != -1)
-				if (!set_arg_type(arglist, p->precision_arg, SIZE_INT))
-					return (NULL);
-			if (p->data_arg != -1)
-				if (!set_arg_type(arglist, p->data_arg, size_of_type(p->type, p->modifier)))
+			}
+			else
+				if (!parse_args(arglist, p))
 					return (NULL);
 		}
 		printables = printables->next;
@@ -88,7 +116,7 @@ static t_arglist	*build_arglist(t_list *printables)
 	return (arglist);
 }
 
-static void	free_arglist(t_arglist **arglist)
+void	free_arglist(t_arglist **arglist)
 {
 	int			i;
 	t_argument	**args;
@@ -111,18 +139,4 @@ static void	free_arglist(t_arglist **arglist)
 	free(args);
 	free(*arglist);
 	*arglist = NULL;
-}
-
-int		extract_positional_args(t_list *printables, va_list ap)
-{
-	t_arglist *arglist;
-
-	arglist = build_arglist(printables);
-	if (arglist == NULL)
-		return (-1);
-	if (!withdraw_args(arglist, ap))
-		return (-1);
-	inject_args(printables, arglist);
-	free_arglist(&arglist);
-	return (-1);
 }

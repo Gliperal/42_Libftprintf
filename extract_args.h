@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 08:27:34 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 11:12:15 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/09 19:10:20 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_arglist
 {
 	int			size;
 	t_argument	**args;
+	int			index;
 }				t_arglist;
 
 #endif
