@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 12:56:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 13:08:03 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,11 @@ ARGSIZE		size_of_type(char type, char modifier);
 t_reader	reader_for_size(ARGSIZE size);
 t_reader	reader_for_type(char type, char modifier);
 t_formatter	formatter_for_type(char type);
+
+int	ft_printf(const char *format, ...);
+
+// TODO Remove
+#include <unistd.h>
+#include <stdio.h>
 
 #endif

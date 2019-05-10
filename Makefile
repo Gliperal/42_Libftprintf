@@ -4,12 +4,14 @@ CSRC=ft_printf.c \
 	 printable.c \
 	 arglist.c build_arglist.c inject_args.c \
 	 read_format_string.c read_placeholder.c \
-	 readers.c sizers.c dispatchers.c
+	 readers.c sizers.c dispatchers.c \
+	 testing.c
 OBJS=ft_printf.o \
 	 printable.o \
 	 arglist.o build_arglist.o inject_args.o \
 	 read_format_string.o read_placeholder.o \
-	 readers.o sizers.o dispatchers.o
+	 readers.o sizers.o dispatchers.o \
+	 testing.o
 GCH=libftprintf.gch
 AR=ar rcs
 RM=rm -rf
@@ -35,4 +37,7 @@ libft/libft.a:
 	make -C libft clean
 
 test: re libft/libft.a
-	$(CC) main.c -I libft -L. -lftprintf -Llibft -lft -o test
+	$(CC) test.c -I libft -L. -lftprintf -Llibft -lft -o test
+
+tclean: fclean
+	$(RM) test

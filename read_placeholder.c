@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 11:18:32 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 13:49:03 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ static int	pop_flags(const char **format)
 		else if ((**format == '0') && !(flags & RIGHTPAD))
 			flags |= ZEROPAD;
 		else if (**format == '-')
-			flags = (flags | RIGHTPAD) & !ZEROPAD;
+			flags = (flags | RIGHTPAD) & ~ZEROPAD;
 		else if ((**format == ' ') && !(flags & SIGNFORCE))
 			flags |= SIGNSPACE;
 		else if (**format == '+')
-			flags = (flags | SIGNFORCE) & !SIGNSPACE;
+			flags = (flags | SIGNFORCE) & ~SIGNSPACE;
 		else if (**format == '\'')
 			flags |= DELIMITERS;
 		else

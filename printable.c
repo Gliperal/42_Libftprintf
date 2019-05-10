@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 12:44:58 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 13:10:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,3 @@ void	free_printables(t_list **printables)
 ** TODO Remove
 */
 
-void	put_printable(t_list *printable)
-{
-	printf("Printable\n");
-	t_printable * p = (t_printable *)printable->content;
-	if (p == 0)
-		printf("\tNULL\n");
-	else
-	{
-		printf("\tflags\t\t%d\n", p->flags);
-		printf("\tfield width_arg\t%d\n", p->field_width_arg);
-		printf("\tfield_width\t%d\n", p->field_width);
-		printf("\tprecision_arg\t%d\n", p->precision_arg);
-		printf("\tprecision\t%d\n", p->precision);
-		printf("\tmodifier\t%d\n", p->modifier);
-		printf("\ttype\t\t%c\n", p->type);
-		printf("\tdata_arg\t%d\n", p->data_arg);
-		printf("\tdata\t\t%p\n", p->data);
-		if ((p->type == 'c') && p->data)
-		{
-			char *c = p->data;
-			printf("\tdata\t\t%c\n", *c);
-		}
-	}
-	printf("/Printable\n");
-}
