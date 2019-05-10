@@ -4,10 +4,18 @@
 int main()
 {
 //	ft_printf("hello%2$+.*1$cworld%3$+.*1$c\n", 8, 'a', 'b');
-	ft_printf("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
+//	ft_printf("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
+
+	/* Basic argument test */
+
+	char *str = malloc(1);
+	ft_printf("|%p|%x|%X|\n", str, 42, 42);
+	printf("%p\n", str);
+	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n");
 
 	/* Format string tests */
 
+	/*
 	ft_printf("[%d]\n", 42);
 	ft_printf("[%+d]\n", 42);
 	ft_printf("[%10d]\n", 42);
@@ -25,6 +33,7 @@ int main()
 	ft_printf("[%-.10ld]\n", 4242424242);
 	ft_printf("[%10.4ld]\n", 4242424242);
 	ft_printf("[%+20.10ld]\n", 4242424242);
+	*/
 
 	// Flags overriding flags
 	// More than one of the same flag
@@ -54,5 +63,7 @@ int main()
 
 //	printf("[%18446744073709551615d]\n", 1);
 //	printf("[%9750000000000000000d]\n", 1);
+
+	while(1) {}
 
 }

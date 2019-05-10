@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 13:34:45 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:57:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,45 @@ static int	positional_args(t_list *printables)
 	return (arg_style);
 }
 
+int	write_printable(t_list *printable)
+{
+	t_printable	*p;
+	t_formatter	formatter;
+	char		*str;
+	int			len;
+
+	p = (t_printable *)printable->content;
+	if (p && p->data)
+	{
+		formatter = formatter_for_type(p->type);
+		if (formatter)
+		{
+			str = (*formatter)(p);
+			if (str)
+			{
+				len = ft_strlen(str);
+				write(1, str, len);
+				free(str);
+				return (len);
+			}
+		}
+	}
+	return (0);
+}
+
+int	write_printables(t_list *printables)
+{
+	int chars_written;
+
+	chars_written = 0;
+	while(printables)
+	{
+		chars_written += write_printable(printables);
+		printables = printables->next;
+	}
+	return (chars_written);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	printf("ft_printf(%s);\n", format);
@@ -61,12 +100,18 @@ int	ft_printf(const char *format, ...)
 	va_list ap;
 	va_start(ap, format);
 	if (!withdraw_args(arglist, ap))
+	{
+		free_printables(&printables);
+		free_arglist(&arglist);
 		return (-1);
+	}
 
 	put_arglist(arglist);
 
 	inject_args(printables, arglist, pa);
-	ft_lstiter(printables, &put_printable);
+//	ft_lstiter(printables, &put_printable);
+	write_printables(printables);
+
 	free_printables(&printables);
 	free_arglist(&arglist);
 

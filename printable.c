@@ -6,13 +6,11 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 13:10:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 14:19:24 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-// TODO Remove
-#include <stdio.h>
 
 t_list	*new_printable(void)
 {
@@ -50,8 +48,3 @@ void	free_printables(t_list **printables)
 	free(*printables);
 	*printables = 0;
 }
-
-/*
-** TODO Remove
-*/
-

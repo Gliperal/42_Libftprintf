@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 13:08:03 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 16:06:45 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		inject_args(t_list *printables, t_arglist *arglist, int positional);
 
 typedef void	*(*t_reader)(va_list);
 typedef ARGSIZE	(*t_sizer)(char modifier);
-typedef char	*(*t_formatter)(void *);
+typedef char	*(*t_formatter)(t_printable *);
 
 typedef struct	s_type_reader
 {
@@ -102,9 +102,14 @@ static const t_type_reader g_type_readers[] =
 	(t_type_reader) {0, 0}
 };
 
+char	*format_char(t_printable *p);
+char	*format_str(t_printable *p);
+char	*format_hexadecimal(t_printable *p);
+char	*format_pointer(t_printable *p);
+
 static const t_type_formatter g_type_formatters[] =
 {
-	(t_type_formatter) {'c', &size_char, 0},
+	(t_type_formatter) {'c', &size_char, &format_char},
 //	(t_type_formatter) {'C', 0, 0},
 	(t_type_formatter) {'d', &size_int, 0},
 	(t_type_formatter) {'e', &size_float, 0},
@@ -115,12 +120,12 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {'G', &size_float, 0},
 	(t_type_formatter) {'i', &size_int, 0},
 	(t_type_formatter) {'o', &size_int, 0},
-	(t_type_formatter) {'p', &size_int, 0},
-	(t_type_formatter) {'s', &size_float, 0},
+	(t_type_formatter) {'p', &size_float, &format_pointer},
+	(t_type_formatter) {'s', &size_float, &format_str},
 //	(t_type_formatter) {'S', &size_float, 0},
 	(t_type_formatter) {'u', &size_int, 0},
-	(t_type_formatter) {'x', &size_int, 0},
-	(t_type_formatter) {'X', &size_int, 0},
+	(t_type_formatter) {'x', &size_int, &format_hexadecimal},
+	(t_type_formatter) {'X', &size_int, &format_hexadecimal},
 	(t_type_formatter) {'%', NULL, 0},
 	(t_type_formatter) {0, 0, 0}
 };

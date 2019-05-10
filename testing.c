@@ -19,10 +19,15 @@ void	put_printable(t_list *printable)
 		printf("\ttype\t\t%c\n", p->type);
 		printf("\tdata_arg\t%d\n", p->data_arg);
 		printf("\tdata\t\t%p\n", p->data);
-		if ((p->type == 'c') && p->data)
+		if (p->data)
 		{
-			char *c = p->data;
-			printf("\tdata\t\t%c\n", *c);
+			t_formatter formatter = formatter_for_type(p->type);
+			if (formatter != NULL)
+			{
+				char *str = (*formatter)(p);
+				printf("\tformatted data\t%s\n", str);
+				free(str);
+			}
 		}
 	}
 	printf("/Printable\n");
