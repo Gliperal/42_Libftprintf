@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-// TODO Yanked these functions from extract_args.c ... need to find a good place for it
+// TODO need to find a good place for this function
 static int	positional_args(t_list *printables)
 {
 	t_printable	*p;
@@ -31,96 +31,6 @@ static int	positional_args(t_list *printables)
 	}
 	return (arg_style);
 }
-
-static int	withdraw_args(t_arglist *arglist, va_list ap)
-{
-	int			i;
-	t_argument	*arg;
-	t_reader	reader;
-
-	i = 0;
-	while (i < arglist->size)
-	{
-		arg = arglist->args[i];
-		reader = reader_for_size(arg->type);
-		if (reader == NULL)
-			return (0);
-		arg->data = (*reader)(ap);
-		i++;
-	}
-	return (1);
-}
-
-static void	parse_args(t_printable *p, t_arglist *arglist)
-{
-	t_argument	*arg;
-
-	if (p->field_width_arg == 0)
-	{
-		arg = arglist->args[arglist->index];
-		p->field_width = *((int *)arg->data);
-		arglist->index++;
-	}
-	if (p->precision_arg == 0)
-	{
-		arg = arglist->args[arglist->index];
-		p->precision = *((int *)arg->data);
-		arglist->index++;
-	}
-	if (p->data_arg == 0)
-	{
-		arg = arglist->args[arglist->index];
-		p->data = arg->data;
-		arglist->index++;
-	}
-}
-
-static void	parse_args_positional(t_printable *p, t_arglist *arglist)
-{
-	t_argument	*arg;
-
-	if (p->field_width_arg != -1)
-	{
-		arg = arglist->args[p->field_width_arg - 1];
-		p->field_width = *((int *)arg->data);
-	}
-	if (p->precision_arg != -1)
-	{
-		arg = arglist->args[p->precision_arg - 1];
-		p->precision = *((int *)arg->data);
-	}
-	if (p->data_arg != -1)
-	{
-		arg = arglist->args[p->data_arg - 1];
-		p->data = arg->data;
-	}
-}
-
-static void	inject_args(t_list *printables, t_arglist *arglist, int positional)
-{
-	t_printable	*p;
-
-	while (printables)
-	{
-		p = (t_printable *)printables->content;
-		if (p)
-		{
-			if (positional)
-				parse_args_positional(p, arglist);
-			else
-			{
-				arglist->index = 0;
-				parse_args(p, arglist);
-			}
-		}
-		printables = printables->next;
-	}
-}
-
-
-
-
-
 
 int test(char *str, ...)
 {
@@ -160,10 +70,10 @@ int	main()
 {
 	t_list *printables;
 
-	test("hello%2$+.*1$cworld%3$+.*1$c\n", 8, 'a', 'b');
-//	test("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
+//	test("hello%2$+.*1$cworld%3$+.*1$c\n", 8, 'a', 'b');
+	test("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
 
-	while(1) {}
+//	while(1) {}
 
 	return (0);
 }

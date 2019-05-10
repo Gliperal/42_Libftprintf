@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 20:38:16 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 18:52:04 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:40:16 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*read_char(va_list ap)
 	c = malloc(sizeof(char));
 	if (c == NULL)
 		return (NULL);
-	*c = (char) va_arg(ap, int);
+	*c = (char)va_arg(ap, int);
 	return (c);
 }
 
@@ -30,7 +30,7 @@ void	*read_short(va_list ap)
 	s = malloc(sizeof(short));
 	if (s == NULL)
 		return (NULL);
-	*s = (short) va_arg(ap, int);
+	*s = (short)va_arg(ap, int);
 	return (s);
 }
 

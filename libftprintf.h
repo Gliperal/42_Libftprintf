@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 12:29:44 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:56:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ typedef struct	s_arglist
 	int			index;
 }				t_arglist;
 
-t_arglist	*new_arglist(void);
-int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type);
-void		free_arglist(t_arglist **arglist);
-t_arglist	*build_arglist(t_list *printables, int positional);
-
-typedef void	*(*t_reader)(va_list);
-typedef ARGSIZE	(*t_sizer)(char modifier);
-typedef char	*(*t_formatter)(void *);
-
 typedef struct	s_printable
 {
 	char		flags;
@@ -71,11 +62,22 @@ typedef struct	s_printable
 	void		*data;
 }				t_printable;
 
-t_list *new_printable();
+t_list *new_printable(void);
 t_list	*read_format_string(const char *format);
 int	read_placeholder(const char **format, t_list *printables);
 void put_printable(t_list *printable);
 void free_printables(t_list **printables);
+
+t_arglist	*new_arglist(void);
+int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type);
+void		free_arglist(t_arglist **arglist);
+t_arglist	*build_arglist(t_list *printables, int positional);
+int			withdraw_args(t_arglist *arglist, va_list ap);
+void		inject_args(t_list *printables, t_arglist *arglist, int positional);
+
+typedef void	*(*t_reader)(va_list);
+typedef ARGSIZE	(*t_sizer)(char modifier);
+typedef char	*(*t_formatter)(void *);
 
 typedef struct	s_type_reader
 {

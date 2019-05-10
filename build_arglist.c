@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 12:30:23 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:51:13 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,23 @@ t_arglist	*build_arglist(t_list *printables, int positional)
 		printables = printables->next;
 	}
 	return (arglist);
+}
+
+int			withdraw_args(t_arglist *arglist, va_list ap)
+{
+	int			i;
+	t_argument	*arg;
+	t_reader	reader;
+
+	i = 0;
+	while (i < arglist->size)
+	{
+		arg = arglist->args[i];
+		reader = reader_for_size(arg->type);
+		if (reader == NULL)
+			return (0);
+		arg->data = (*reader)(ap);
+		i++;
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 11:44:00 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 12:44:58 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 // TODO Remove
 #include <stdio.h>
 
-t_list *new_printable()
+t_list	*new_printable(void)
 {
-	t_list *l;
-	t_printable *p;
+	t_list		*l;
+	t_printable	*p;
 
 	p = (t_printable *)malloc(sizeof(t_printable));
 	if (p == NULL)
@@ -37,7 +37,7 @@ t_list *new_printable()
 	return (l);
 }
 
-void free_printables(t_list **printables)
+void	free_printables(t_list **printables)
 {
 	t_printable *p;
 
@@ -51,8 +51,11 @@ void free_printables(t_list **printables)
 	*printables = 0;
 }
 
-// TODO Remove
-void put_printable(t_list *printable)
+/*
+** TODO Remove
+*/
+
+void	put_printable(t_list *printable)
 {
 	printf("Printable\n");
 	t_printable * p = (t_printable *)printable->content;
@@ -72,7 +75,7 @@ void put_printable(t_list *printable)
 		if ((p->type == 'c') && p->data)
 		{
 			char *c = p->data;
-			printf("\tdata\t\t%p\n", c);
+			printf("\tdata\t\t%c\n", *c);
 		}
 	}
 	printf("/Printable\n");

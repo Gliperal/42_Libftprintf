@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 14:02:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 19:14:22 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 13:00:38 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 static int read_text(const char **format, t_list *printables)
 {
-	const char *start;
-	t_list *elem;
-	t_printable *p;
+	const char	*start;
+	t_list		*elem;
+	t_printable	*p;
 
 	start = *format;
 	while (**format != '%' && **format != 0)
@@ -34,11 +34,11 @@ static int read_text(const char **format, t_list *printables)
 	return (0);
 }
 
-t_list	*read_format_string(const char *format)
+t_list		*read_format_string(const char *format)
 {
-	t_list *printables;
-	int status;
-	const char **str;
+	t_list		*printables;
+	int			status;
+	const char	**str;
 
 	printables = ft_lstnew(0, 0);
 	if (printables == NULL)
