@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 11:52:38 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 19:12:29 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:35:10 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ typedef struct	s_printable
 	int			data_arg;
 	void		*data;
 }				t_printable;
+
+void free_printables(t_list **printables);
 
 #endif

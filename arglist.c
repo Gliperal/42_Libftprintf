@@ -6,16 +6,11 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/09 21:10:20 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 11:37:41 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-// TODO Remove
-#include <unistd.h>
-#include <stdio.h>
-#include <stdarg.h>
 
 // Two potential memory leaks due to not freeing the argument array
 static int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
@@ -129,9 +124,8 @@ void	free_arglist(t_arglist **arglist)
 	{
 		if (args[i])
 		{
-//			if (args[i]->data)
-//				free(args[i]->data);
-			printf("free(%p)\n", args[i]);
+			if (args[i]->data)
+				free(args[i]->data);
 			free(args[i]);
 		}
 		i++;

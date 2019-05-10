@@ -146,10 +146,11 @@ int test(char *str, ...)
 
 	inject_args(printables, arglist, pa);
 	ft_lstiter(printables, &put_printable);
-//	free_printables(&printables);
-//	free_arglist(&arglist);
+	free_printables(&printables);
+	free_arglist(&arglist);
 
 	va_end(ap);
+
 	return (-1);
 }
 
@@ -159,6 +160,8 @@ int	main()
 
 	test("hello%2$+.*1$cworld%3$+.*1$c\n", 8, 'a', 'b');
 //	test("hello%+.*cworld%+.10c\n", 4, 'a', 'b');
+
+	while(1) {}
 
 	return (0);
 }
