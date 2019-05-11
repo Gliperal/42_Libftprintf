@@ -43,4 +43,5 @@ test: re libft/libft.a
 	$(RM) $(OBJS)
 
 tclean: fclean
+	make -C libft fclean
 	$(RM) test

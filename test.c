@@ -8,10 +8,8 @@ int main()
 
 	/* Basic argument test */
 
-	char *str = malloc(1);
-	ft_printf("|%p|%x|%X|\n", str, 42, 42);
-	printf("%p\n", str);
-	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n");
+	char *str = "42";
+	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, 42);
 
 	/* Format string tests */
 
@@ -46,6 +44,7 @@ int main()
 	// plus at the end of a number
 	// field width / flags / precision on %
 	// strings with a null terminator in the middle (use precision)
+	// test p in both the malloc block and the stack
 
 	/* Flag tests */
 	/* the default printf doesn't seem to be able to use appostrophe correctly */

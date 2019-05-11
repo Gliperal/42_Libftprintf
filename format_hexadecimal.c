@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 16:43:50 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 18:17:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*value_to_hex(char *ptr, int size, int uppercase)
 	while (i < size)
 	{
 		c = ptr[i];
-		hex[2 * i] = hex_to_char(c % 16, uppercase);
-		hex[2 * i + 1] = hex_to_char(c / 16, uppercase);
+		hex[2 * i] = hex_to_char(c & 0xf, uppercase);
+		hex[2 * i + 1] = hex_to_char(c >> 4, uppercase);
 		i++;
 	}
 	i = 2 * size - 1;
@@ -65,9 +65,21 @@ char	*format_hexadecimal(t_printable *p)
 	char	*mem;
 	int		size;
 	int		uppercase;
+	char	*hex;
+	char	*tmp;
 
 	mem = p->data;
 	size = 2 * byte_size(size_of_type(p->type, p->modifier));
 	uppercase = (p->type == 'X');
-	return (value_to_hex(mem, size, uppercase));
+	hex = value_to_hex(mem, size, uppercase);
+	if (p->flags & ALTFORM)
+	{
+		tmp = hex;
+		if (uppercase)
+			hex = ft_strsum("0X", hex);
+		else	
+			hex = ft_strsum("0x", hex);
+		free(tmp);
+	}
+	return (hex);
 }
