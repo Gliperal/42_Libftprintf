@@ -133,6 +133,30 @@ void octal()
 
 void unsigned_decimal()
 {
+	ft_printf("%lu\n", LONG_MAX);
+	printf("%lu\n", LONG_MAX);
+	ft_printf("%lu\n", ((long) INT_MAX) + 1);
+	printf("%lu\n", ((long) INT_MAX) + 1);
+	ft_printf("%u\n", INT_MAX);
+	printf("%u\n", INT_MAX);
+	ft_printf("%u\n", 1234567890);
+	printf("%u\n", 1234567890);
+	ft_printf("%u\n", 42);
+	printf("%u\n", 42);
+	ft_printf("%u\n", 1);
+	printf("%u\n", 1);
+	ft_printf("%u\n", 0);
+	printf("%u\n", 0);
+	ft_printf("%u\n", -1);
+	printf("%u\n", -1);
+	ft_printf("%u\n", -52543054);
+	printf("%u\n", -52543054);
+	ft_printf("%u\n", INT_MIN);
+	printf("%u\n", INT_MIN);
+	ft_printf("%lu\n", ((long) INT_MIN) - 1);
+	printf("%lu\n", ((long) INT_MIN) - 1);
+	ft_printf("%lu\n", LONG_MIN);
+	printf("%lu\n", LONG_MIN);
 }
 
 
@@ -140,6 +164,30 @@ void unsigned_decimal()
 
 void hexadecimal()
 {
+	ft_printf("%x\n", 0);
+	printf("%x\n", 0);
+	ft_printf("%x\n", 1);
+	printf("%x\n", 1);
+	ft_printf("%x\n", 66);
+	printf("%x\n", 66);
+	ft_printf("%x\n", 43981);
+	printf("%x\n", 43981);
+	ft_printf("%x\n", INT_MAX);
+	printf("%x\n", INT_MAX);
+	ft_printf("%lx\n", (long) INT_MAX + 1);
+	printf("%lx\n", (long) INT_MAX + 1);
+	ft_printf("%lx\n", LONG_MAX);
+	printf("%lx\n", LONG_MAX);
+	ft_printf("%lx\n", ULONG_MAX);
+	printf("%lx\n", ULONG_MAX);
+	ft_printf("%x\n", -1);
+	printf("%x\n", -1);
+	ft_printf("%x\n", -230538686);
+	printf("%x\n", -230538686);
+	ft_printf("%x\n", INT_MIN);
+	printf("%x\n", INT_MIN);
+	ft_printf("%lx\n", LONG_MIN);
+	printf("%lx\n", LONG_MIN);
 }
 
 
@@ -206,6 +254,8 @@ void octal_f()
 {
 	ft_printf("%#o\n", 342391);
 	printf("%#o\n", 342391);
+	ft_printf("%#o\n", 0);
+	printf("%#o\n", 0);
 	ft_printf("%lu\n", ULONG_MAX);
 	printf("%lu\n", ULONG_MAX);
 	ft_printf("%hho\n", (char) -94);
@@ -217,6 +267,8 @@ void octal_f()
 
 void unsigned_f()
 {
+	ft_printf("%hhu\n", (char) -114);
+	printf("%hhu\n", (char) -114);
 }
 
 
@@ -313,7 +365,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {19, -1};
+	int tests[] = {7, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

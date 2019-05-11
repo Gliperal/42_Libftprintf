@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 18:17:43 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 16:28:50 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ char	*value_to_hex(char *ptr, int size, int uppercase)
 	i = 2 * size - 1;
 	while (hex[i] == '0')
 		i--;
+	if (i == -1)
+		i = 0;
 	hex[i + 1] = 0;
 	ft_strrev(hex);
 	return (hex);
@@ -69,7 +71,7 @@ char	*format_hexadecimal(t_printable *p)
 	char	*tmp;
 
 	mem = p->data;
-	size = 2 * byte_size(size_of_type(p->type, p->modifier));
+	size = byte_size(size_of_type(p->type, p->modifier));
 	uppercase = (p->type == 'X');
 	hex = value_to_hex(mem, size, uppercase);
 	if (p->flags & ALTFORM)
