@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_octal.c                                     :+:      :+:    :+:   */
+/*   format_decimal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 19:11:55 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 14:46:25 by nwhitlow         ###   ########.fr       */
+/*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
+/*   Updated: 2019/05/11 14:48:14 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*format_octal(t_printable *p)
+char	*format_decimal(t_printable *p)
 {
 	char *str;
 	char *ostr;
-	unsigned long long n;
+	long long n;
 
 	if (p->modifier == MOD_HH)
-		n = *((unsigned char *)p->data);
+		n = *((char *)p->data);
 	else if (p->modifier == MOD_H)
-		n = *((unsigned short *)p->data);
+		n = *((short *)p->data);
 	else if (p->modifier == MOD_L)
-		n = *((unsigned long *)p->data);
+		n = *((long *)p->data);
 	else if (p->modifier == MOD_LL)
-		n = *((unsigned long long *)p->data);
+		n = *((long long *)p->data);
 	else
-		n = *((unsigned int *)p->data);
-	str = ft_itoa_base_u(n, "01234567");
+		n = *((int *)p->data);
+	str = ft_itoa_base(n, "0123456789");
 	if (!str)
 		return (NULL);
 	if (p->flags & ALTFORM)

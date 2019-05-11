@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   format_octal.c                                     :+:      :+:    :+:   */
+/*   format_unsigned_decimal.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/10 19:11:55 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 14:46:25 by nwhitlow         ###   ########.fr       */
+/*   Created: 2019/05/11 14:43:19 by nwhitlow          #+#    #+#             */
+/*   Updated: 2019/05/11 14:46:08 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*format_octal(t_printable *p)
+char	*format_unsigned_decimal(t_printable *p)
 {
 	char *str;
 	char *ostr;
@@ -28,7 +28,7 @@ char	*format_octal(t_printable *p)
 		n = *((unsigned long long *)p->data);
 	else
 		n = *((unsigned int *)p->data);
-	str = ft_itoa_base_u(n, "01234567");
+	str = ft_itoa_base_u(n, "0123456789");
 	if (!str)
 		return (NULL);
 	if (p->flags & ALTFORM)

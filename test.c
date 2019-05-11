@@ -8,7 +8,15 @@
 void basic()
 {
 	char *str = "42";
-	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, 42);
+	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+}
+
+
+/* Char tests */
+
+void character()
+{
 }
 
 
@@ -28,21 +36,110 @@ void pointer()
 }
 
 
+/* Decimal tests */
+
+void decimal()
+{
+	ft_printf("%d\n", 0);
+	printf("%d\n", 0);
+	ft_printf("%d\n", 1);
+	printf("%d\n", 1);
+	ft_printf("%d\n", 42);
+	printf("%d\n", 42);
+	ft_printf("%d\n", 9001);
+	printf("%d\n", 9001);
+	ft_printf("%d\n", INT_MAX);
+	printf("%d\n", INT_MAX);
+	ft_printf("%ld\n", (long) INT_MAX + 1);
+	printf("%ld\n", (long) INT_MAX + 1);
+	ft_printf("%ld\n", LONG_MAX);
+	printf("%ld\n", LONG_MAX);
+	ft_printf("%d\n", -1);
+	printf("%d\n", -1);
+	ft_printf("%d\n", -42);
+	printf("%d\n", -42);
+	ft_printf("%d\n", -9001);
+	printf("%d\n", -9001);
+	ft_printf("%d\n", INT_MIN);
+	printf("%d\n", INT_MIN);
+	ft_printf("%ld\n", (long) INT_MIN - 1);
+	printf("%ld\n", (long) INT_MIN - 1);
+	ft_printf("%ld\n", LONG_MIN);
+	printf("%ld\n", LONG_MIN);
+
+	ft_printf("%i\n", 0);
+	printf("%i\n", 0);
+	ft_printf("%i\n", 1);
+	printf("%i\n", 1);
+	ft_printf("%i\n", 42);
+	printf("%i\n", 42);
+	ft_printf("%i\n", 9001);
+	printf("%i\n", 9001);
+	ft_printf("%i\n", INT_MAX);
+	printf("%i\n", INT_MAX);
+	ft_printf("%li\n", (long) INT_MAX + 1);
+	printf("%li\n", (long) INT_MAX + 1);
+	ft_printf("%li\n", LONG_MAX);
+	printf("%li\n", LONG_MAX);
+	ft_printf("%i\n", -1);
+	printf("%i\n", -1);
+	ft_printf("%i\n", -42);
+	printf("%i\n", -42);
+	ft_printf("%i\n", -9001);
+	printf("%i\n", -9001);
+	ft_printf("%i\n", INT_MIN);
+	printf("%i\n", INT_MIN);
+	ft_printf("%li\n", (long) INT_MIN - 1);
+	printf("%li\n", (long) INT_MIN - 1);
+	ft_printf("%li\n", LONG_MIN);
+	printf("%li\n", LONG_MIN);
+}
+
+
 /* Octal number tests */
 
 void octal()
 {
 	ft_printf("%lo\n", LONG_MAX);
+	printf("%lo\n", LONG_MAX);
+	ft_printf("%lo\n", ((long) INT_MAX) + 1);
+	printf("%lo\n", ((long) INT_MAX) + 1);
 	ft_printf("%o\n", INT_MAX);
+	printf("%o\n", INT_MAX);
 	ft_printf("%o\n", 16434824);
+	printf("%o\n", 16434824);
 	ft_printf("%o\n", 34);
+	printf("%o\n", 34);
 	ft_printf("%o\n", 1);
+	printf("%o\n", 1);
 	ft_printf("%o\n", 0);
+	printf("%o\n", 0);
 	ft_printf("%o\n", -1);
-	ft_printf("%o\n", -34);
-	ft_printf("%o\n", -16434824);
+	printf("%o\n", -1);
+	ft_printf("%o\n", -30);
+	printf("%o\n", -30);
+	ft_printf("%o\n", -1665406182);
+	printf("%o\n", -1665406182);
 	ft_printf("%o\n", INT_MIN);
+	printf("%o\n", INT_MIN);
+	ft_printf("%lo\n", ((long) INT_MIN) - 1);
+	printf("%lo\n", ((long) INT_MIN) - 1);
 	ft_printf("%lo\n", LONG_MIN);
+	printf("%lo\n", LONG_MIN);
+}
+
+
+/* Unsigned decimal tests */
+
+void unsigned_decimal()
+{
+}
+
+
+/* Hexadecimal tests */
+
+void hexadecimal()
+{
 }
 
 
@@ -70,6 +167,36 @@ void format_string()
 
 	// Throw some special characters in the string that aren't part of a format argument
 	// plus at the end of a number
+	// Some tests with no newline at the end
+}
+
+
+/* Char format tests */
+
+void char_f()
+{
+}
+
+
+/* String format tests */
+
+void string_f()
+{
+}
+
+
+/* Pointer format tests */
+
+void pointer_f()
+{
+}
+
+
+/* Decimal tests */
+
+void decimal_f()
+{
+	// d and i
 }
 
 
@@ -78,7 +205,25 @@ void format_string()
 void octal_f()
 {
 	ft_printf("%#o\n", 342391);
+	printf("%#o\n", 342391);
 	ft_printf("%lu\n", ULONG_MAX);
+	printf("%lu\n", ULONG_MAX);
+	ft_printf("%hho\n", (char) -94);
+	printf("%hho\n", (char) -94);
+}
+
+
+/* Unsigned decimal format tests */
+
+void unsigned_f()
+{
+}
+
+
+/* Hexadecimal format tests */
+
+void hexadecimal_f()
+{
 }
 
 
@@ -143,22 +288,32 @@ typedef void	(*t_group)(void);
 
 static const t_group g_test_groups[] =
 {
-	&basic,
-	&string,
-	&pointer,
-	&octal,
-	&format_string,
-	&octal_f,
-	&flags,
-	&flags2,
-	&field_width,
-	&precision,
-	&aa
+	/*  0 */	&basic,
+	/*  1 */	&character,
+	/*  2 */	&string,
+	/*  3 */	&pointer,
+	/*  4 */	&decimal,
+	/*  5 */	&octal,
+	/*  6 */	&unsigned_decimal,
+	/*  7 */	&hexadecimal,
+	/*  8 */	&format_string,
+	/*  9 */	&char_f,
+	/* 10 */	&string_f,
+	/* 11 */	&pointer_f,
+	/* 12 */	&decimal_f,
+	/* 13 */	&octal_f,
+	/* 14 */	&unsigned_f,
+	/* 15 */	&hexadecimal_f,
+	/* 16 */	&flags,
+	/* 17 */	&flags2,
+	/* 18 */	&field_width,
+	/* 19 */	&precision,
+	/* 20 */	&aa
 };
 
 int main()
 {
-	int tests[] = {0, 3, -1};
+	int tests[] = {19, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

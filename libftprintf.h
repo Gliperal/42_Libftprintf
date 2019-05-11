@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 12:16:02 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 15:43:34 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,24 +108,27 @@ char	*format_str(t_printable *p);
 char	*format_hexadecimal(t_printable *p);
 char	*format_pointer(t_printable *p);
 char	*format_octal(t_printable *p);
+char	*format_unsigned_decimal(t_printable *p);
+char	*format_decimal(t_printable *p);
 
 static const t_type_formatter g_type_formatters[] =
 {
 	(t_type_formatter) {'c', &size_char, &format_char},
 //	(t_type_formatter) {'C', 0, 0},
-	(t_type_formatter) {'d', &size_int, 0},
+	(t_type_formatter) {'d', &size_int, &format_decimal},
 	(t_type_formatter) {'e', &size_float, 0},
 	(t_type_formatter) {'E', &size_float, 0},
 	(t_type_formatter) {'f', &size_float, 0},
 	(t_type_formatter) {'F', &size_float, 0},
 	(t_type_formatter) {'g', &size_float, 0},
 	(t_type_formatter) {'G', &size_float, 0},
-	(t_type_formatter) {'i', &size_int, 0},
+	(t_type_formatter) {'i', &size_int, &format_decimal},
 	(t_type_formatter) {'o', &size_int, &format_octal},
 	(t_type_formatter) {'p', &size_ptr, &format_pointer},
+	(t_type_formatter) {'\1', &size_ptr, &format_str},
 	(t_type_formatter) {'s', &size_ptr, &format_str},
 //	(t_type_formatter) {'S', &size_float, 0},
-	(t_type_formatter) {'u', &size_int, 0},
+	(t_type_formatter) {'u', &size_int, &format_unsigned_decimal},
 	(t_type_formatter) {'x', &size_int, &format_hexadecimal},
 	(t_type_formatter) {'X', &size_int, &format_hexadecimal},
 	(t_type_formatter) {'%', NULL, 0},
