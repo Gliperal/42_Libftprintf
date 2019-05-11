@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 19:39:40 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 12:44:17 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	write_printables(t_list *printables)
 
 int	ft_printf(const char *format, ...)
 {
-	printf("ft_printf(%s);\n", format);
+	printf("\nft_printf %s\n", format);
 	t_list *printables = read_format_string(format);
 
 	int pa = positional_args(printables);

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 20:49:19 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/08 21:13:30 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 12:17:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void	*read_short(va_list ap);
 void	*read_int(va_list ap);
 void	*read_long(va_list ap);
 void	*read_longlong(va_list ap);
-void	*read_str(va_list ap);
+void	*read_ptr(va_list ap);
 
 #endif

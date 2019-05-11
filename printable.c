@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:48:06 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 14:19:24 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 12:07:27 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_list	*new_printable(void)
 	p->field_width_arg = -1;
 	p->field_width = 0;
 	p->precision_arg = -1;
-	p->precision = 0;
+	p->precision = -1;
 	p->type = 0;
 	p->data_arg = -1;
 	p->data = 0;

@@ -9,11 +9,11 @@ int main()
 
 	/* Basic argument test */
 
-	char *str = "42";
-	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, 42);
+//	char *str = "42";
+//	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, 42);
 
 	/* Octal number tests */
-
+/*
 	ft_printf("%lo\n", LONG_MAX);
 	ft_printf("%o\n", INT_MAX);
 	ft_printf("%o\n", 16434824);
@@ -25,11 +25,18 @@ int main()
 	ft_printf("%o\n", -16434824);
 	ft_printf("%o\n", INT_MIN);
 	ft_printf("%lo\n", LONG_MIN);
-
+*/
 	/* Octal format tests */
-
+/*
 	ft_printf("%#o\n", 342391);
 	ft_printf("%lu\n", ULONG_MAX);
+*/
+	/* String precision tests */
+
+	ft_printf("[%s]\n", "Hello world.");
+	ft_printf("[%.s]\n", "Hello world.");
+	ft_printf("[%.0s]\n", "Hello world.");
+	ft_printf("[%.4s]\n", "Hello world.");
 
 	/* Format string tests */
 

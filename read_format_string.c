@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 14:02:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 14:34:00 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/11 12:42:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static int read_text(const char **format, t_list *printables)
 	p = (t_printable *)elem->content;
 	p->type = 's';
 	p->precision = *format - start;
-	p->data = (char *)start;
+	p->data = malloc(sizeof(char **));
+	if (p->data == NULL)
+		return (-1);
+	*((const char **)p->data) = start;
 	ft_lstappend(printables, elem);
 	return (0);
 }
