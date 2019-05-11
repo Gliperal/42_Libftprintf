@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 16:06:45 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:18:23 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ char	*format_char(t_printable *p);
 char	*format_str(t_printable *p);
 char	*format_hexadecimal(t_printable *p);
 char	*format_pointer(t_printable *p);
+char	*format_octal(t_printable *p);
 
 static const t_type_formatter g_type_formatters[] =
 {
@@ -119,7 +120,7 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {'g', &size_float, 0},
 	(t_type_formatter) {'G', &size_float, 0},
 	(t_type_formatter) {'i', &size_int, 0},
-	(t_type_formatter) {'o', &size_int, 0},
+	(t_type_formatter) {'o', &size_int, &format_octal},
 	(t_type_formatter) {'p', &size_float, &format_pointer},
 	(t_type_formatter) {'s', &size_float, &format_str},
 //	(t_type_formatter) {'S', &size_float, 0},

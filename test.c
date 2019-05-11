@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include "libftprintf.h"
 
 int main()
@@ -10,6 +11,25 @@ int main()
 
 	char *str = "42";
 	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, 42);
+
+	/* Octal number tests */
+
+	ft_printf("%lo\n", LONG_MAX);
+	ft_printf("%o\n", INT_MAX);
+	ft_printf("%o\n", 16434824);
+	ft_printf("%o\n", 34);
+	ft_printf("%o\n", 1);
+	ft_printf("%o\n", 0);
+	ft_printf("%o\n", -1);
+	ft_printf("%o\n", -34);
+	ft_printf("%o\n", -16434824);
+	ft_printf("%o\n", INT_MIN);
+	ft_printf("%lo\n", LONG_MIN);
+
+	/* Octal format tests */
+
+	ft_printf("%#o\n", 342391);
+	ft_printf("%lu\n", ULONG_MAX);
 
 	/* Format string tests */
 

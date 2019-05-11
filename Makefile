@@ -5,14 +5,14 @@ CSRC=ft_printf.c \
 	 arglist.c build_arglist.c inject_args.c \
 	 read_format_string.c read_placeholder.c \
 	 readers.c sizers.c dispatchers.c \
-	 format_char.c format_str.c format_hexadecimal.c format_pointer.c \
+	 format_char.c format_str.c format_hexadecimal.c format_pointer.c format_octal.c \
 	 testing.c
 OBJS=ft_printf.o \
 	 printable.o \
 	 arglist.o build_arglist.o inject_args.o \
 	 read_format_string.o read_placeholder.o \
 	 readers.o sizers.o dispatchers.o \
-	 format_char.o format_str.o format_hexadecimal.o format_pointer.o \
+	 format_char.o format_str.o format_hexadecimal.o format_pointer.o format_octal.o \
 	 testing.o
 GCH=libftprintf.gch
 AR=ar rcs

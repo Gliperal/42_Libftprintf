@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 14:57:43 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/10 19:39:40 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	}
 
-	put_arglist(arglist);
+//	put_arglist(arglist);
 
 	inject_args(printables, arglist, pa);
 //	ft_lstiter(printables, &put_printable);
