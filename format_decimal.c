@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 14:48:14 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:01:48 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*format_decimal(t_printable *p)
 {
 	char *str;
-	char *ostr;
+	char *tmp;
 	long long n;
 
 	if (p->modifier == MOD_HH)
@@ -28,14 +28,16 @@ char	*format_decimal(t_printable *p)
 		n = *((long long *)p->data);
 	else
 		n = *((int *)p->data);
-	str = ft_itoa_base(n, "0123456789");
+	str = ft_itoa_base_u(ft_abs(n), "0123456789");
 	if (!str)
 		return (NULL);
 	if (p->flags & ALTFORM)
 	{
-		ostr = ft_strsum("0", str);
+		tmp = ft_strsum("0", str);
 		free(str);
-		return (ostr);
+		str = tmp;
 	}
-	return (str);
+	tmp = pad_printable(p, num_prefix(p->flags, n < 0), str);
+	free(str);
+	return (tmp);
 }

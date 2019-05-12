@@ -32,6 +32,7 @@ void string()
 
 void pointer()
 {
+	// null pointer
 	// test p in both the malloc block and the stack
 }
 
@@ -244,7 +245,20 @@ void pointer_f()
 
 void decimal_f()
 {
-	// d and i
+	ft_printf("#%d\n", 42);
+	printf("#%d\n", 42);
+	ft_printf("+%d\n", 42);
+	printf("+%d\n", 42);
+	ft_printf("+%d\n", -42);
+	printf("+%d\n", -42);
+	ft_printf("+%d\n", 0);
+	printf("+%d\n", 0);
+	ft_printf(" %d\n", 42);
+	printf(" %d\n", 42);
+	ft_printf("% d\n", -42);
+	printf("% d\n", -42);
+	ft_printf("% d\n", 0);
+	printf("% d\n", 0);
 }
 
 
@@ -260,6 +274,8 @@ void octal_f()
 	printf("%lu\n", ULONG_MAX);
 	ft_printf("%hho\n", (char) -94);
 	printf("%hho\n", (char) -94);
+	ft_printf("%ho\n", (short) -42);
+	printf("%ho\n", (short) -42);
 }
 
 
@@ -269,6 +285,10 @@ void unsigned_f()
 {
 	ft_printf("%hhu\n", (char) -114);
 	printf("%hhu\n", (char) -114);
+	ft_printf("%hu\n", (short) -42);
+	printf("%hu\n", (short) -42);
+	ft_printf("%lu\n", (long) -42);
+	printf("%lu\n", (long) -42);
 }
 
 
@@ -291,13 +311,16 @@ void flags()
 	// negative arg field width overriding flags
 	// Are zeros allowed to start positional arguments or non-positional precision?
 	// field width / flags / precision on %
-	/* the default printf doesn't seem to be able to use appostrophe correctly */
 }
+
 
 /* Flag specific tests */
 
 void flags2()
 {
+	/* the default printf doesn't seem to be able to use appostrophe correctly */
+	// ft_printf("%'d\n", 42424242);
+	// printf("%'d\n", 42424242);
 }
 
 
@@ -305,6 +328,52 @@ void flags2()
 
 void field_width()
 {
+	ft_printf("[%010d]\n", -42);
+	printf("[%010d]\n", -42);
+	ft_printf("[%0+10d]\n", -42);
+	printf("[%0+10d]\n", -42);
+	ft_printf("[%0+10d]\n", 42);
+	printf("[%0+10d]\n", 42);
+	ft_printf("[%0 10d]\n", 42);
+	printf("[%0 10d]\n", 42);
+	ft_printf("[%010.4d]\n", 42);
+	printf("[%010.4d]\n", 42);
+//	ft_printf("[%010.4u]\n", 42);
+//	printf("[%010.4u]\n", 42);
+//	ft_printf("[%010.0u]\n", 42);
+//	printf("[%010.0u]\n", 42);
+//	ft_printf("[%10s]\n", "abcd");
+//	printf("[%10s]\n", "abcd");
+
+	ft_printf("[%-10d]\n", -42);
+	printf("[%-10d]\n", -42);
+	ft_printf("[%-+10d]\n", -42);
+	printf("[%-+10d]\n", -42);
+	ft_printf("[%-+10d]\n", 42);
+	printf("[%-+10d]\n", 42);
+	ft_printf("[%- 10d]\n", 42);
+	printf("[%- 10d]\n", 42);
+	ft_printf("[%-10.4d]\n", 42);
+	printf("[%-10.4d]\n", 42);
+//	ft_printf("[%-10.4u]\n", 42);
+//	printf("[%-10.4u]\n", 42);
+//	ft_printf("[%-10s]\n", "abcd");
+//	printf("[%-10s]\n", "abcd");
+
+	ft_printf("[%02d]\n", -42);
+	printf("[%02d]\n", -42);
+	ft_printf("[%0+2d]\n", -42);
+	printf("[%0+2d]\n", -42);
+	ft_printf("[%0+2d]\n", 42);
+	printf("[%0+2d]\n", 42);
+	ft_printf("[%0 2d]\n", 42);
+	printf("[%0 2d]\n", 42);
+	ft_printf("[%03.4d]\n", 42);
+	printf("[%03.4d]\n", 42);
+//	ft_printf("[%03.4u]\n", 42);
+//	printf("[%03.4u]\n", 42);
+//	ft_printf("[%3s]\n", "abcd");
+//	printf("[%3s]\n", "abcd");
 }
 
 
@@ -365,7 +434,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {7, -1};
+	int tests[] = {18, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

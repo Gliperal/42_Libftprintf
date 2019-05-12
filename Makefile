@@ -6,6 +6,7 @@ CSRC=ft_printf.c \
 	 read_format_string.c read_placeholder.c \
 	 readers.c sizers.c dispatchers.c \
 	 format_char.c format_str.c format_hexadecimal.c format_pointer.c format_octal.c format_unsigned_decimal.c format_decimal.c \
+	 pad_printable.c \
 	 testing.c
 OBJS=ft_printf.o \
 	 printable.o \
@@ -13,6 +14,7 @@ OBJS=ft_printf.o \
 	 read_format_string.o read_placeholder.o \
 	 readers.o sizers.o dispatchers.o \
 	 format_char.o format_str.o format_hexadecimal.o format_pointer.o format_octal.o format_unsigned_decimal.o format_decimal.o \
+	 pad_printable.o \
 	 testing.o
 GCH=libftprintf.gch
 AR=ar rcs
