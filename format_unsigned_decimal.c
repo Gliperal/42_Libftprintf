@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:43:19 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:54:21 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 13:58:42 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*format_unsigned_decimal(t_printable *p)
 {
 	char *str;
+	char *tmp;
 	unsigned long long n;
 
 	if (p->modifier == MOD_HH)
@@ -33,5 +34,7 @@ char	*format_unsigned_decimal(t_printable *p)
 	if (p->precision != -1)
 		if (!pad_left(&str, p->precision))
 			return (NULL);
-	return (str);
+	tmp = pad_printable(p, num_prefix(p->flags, 0), str);
+	free(str);
+	return (tmp);
 }

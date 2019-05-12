@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 19:11:55 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:50:52 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 13:58:08 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ char	*format_octal(t_printable *p)
 	if (p->precision != -1)
 		if (!pad_left(&str, p->precision))
 			return (NULL);
-	return (str);
+	ostr = pad_printable(p, num_prefix(p->flags, 0), str);
+	free(str);
+	return (ostr);
 }

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:47:30 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:08:59 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ static const t_type_reader g_type_readers[] =
 
 char	*format_char(t_printable *p);
 char	*format_str(t_printable *p);
+char	*format_percent(t_printable *p);
 char	*format_hexadecimal(t_printable *p);
 char	*format_pointer(t_printable *p);
 char	*format_octal(t_printable *p);
@@ -131,7 +132,7 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {'u', &size_int, &format_unsigned_decimal},
 	(t_type_formatter) {'x', &size_int, &format_hexadecimal},
 	(t_type_formatter) {'X', &size_int, &format_hexadecimal},
-	(t_type_formatter) {'%', NULL, 0},
+	(t_type_formatter) {'%', NULL, &format_percent},
 	(t_type_formatter) {0, 0, 0}
 };
 

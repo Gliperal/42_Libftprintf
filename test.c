@@ -328,6 +328,30 @@ void flags2()
 
 void field_width()
 {
+	char *ptr = "";
+	ft_printf("[%10c]\n", 'c');
+	printf("[%10c]\n", 'c');
+	ft_printf("[%10s]\n", "hi there");
+	printf("[%10s]\n", "hi there");
+	ft_printf("[%20p]\n", ptr);
+	printf("[%20p]\n", ptr);
+	ft_printf("[%10d]\n", 42);
+	printf("[%10d]\n", 42);
+	ft_printf("[%10i]\n", 42);
+	printf("[%10i]\n", 42);
+	ft_printf("[%10o]\n", 34);
+	printf("[%10o]\n", 34);
+	ft_printf("[%10u]\n", 42);
+	printf("[%10u]\n", 42);
+	ft_printf("[%10x]\n", 66);
+	printf("[%10x]\n", 66);
+	ft_printf("[%10X]\n", 66);
+	printf("[%10X]\n", 66);
+//	ft_printf("[%10f]\n", 42.42);
+//	printf("[%10f]\n", 42.42);
+	ft_printf("[%10%]\n");
+	printf("[%10%]\n");
+
 	ft_printf("[%010d]\n", -42);
 	printf("[%010d]\n", -42);
 	ft_printf("[%0+10d]\n", -42);
@@ -510,7 +534,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {19, -1};
+	int tests[] = {18, 19, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 14:47:40 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 14:48:12 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 13:48:53 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 char	*format_percent(t_printable *p)
 {
-	return (ft_strdup("%"));
+	return (pad_printable(p, "", "%"));
 }
