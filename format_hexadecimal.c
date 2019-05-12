@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 14:13:52 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:39:24 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*format_hexadecimal(t_printable *p)
 	int		uppercase;
 	char	*hex;
 	char	*tmp;
+	char	*prefix;
 
 	mem = p->data;
 	size = byte_size(size_of_type(p->type, p->modifier));
@@ -80,16 +81,19 @@ char	*format_hexadecimal(t_printable *p)
 		if (!pad_left(&hex, p->precision))
 			return (NULL);
 	}
-	tmp = hex;
 	if (p->flags & ALTFORM)
-	{
-		if (uppercase)
-			hex = pad_printable(p, "0X", hex);
-		else
-			hex = pad_printable(p, "0x", hex);
-	}
+		prefix = uppercase ? "0X" : "0x";
 	else
-		hex = pad_printable(p, "", hex);
+		prefix = "";
+	if (!(p->flags & ZEROPAD))
+	{
+		tmp = hex;
+		hex = ft_strsum(prefix, hex);
+		prefix = "";
+		free(tmp);
+	}
+	tmp = hex;
+	hex = pad_printable(p, prefix, hex);
 	free(tmp);
 	return (hex);
 }
