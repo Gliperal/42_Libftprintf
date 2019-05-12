@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 13:37:31 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:13:52 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ char	*format_hexadecimal(t_printable *p)
 	uppercase = (p->type == 'X');
 	hex = value_to_hex(mem, size, uppercase);
 	if (p->precision != -1)
+	{
+		p->flags &= ~ZEROPAD;
 		if (!pad_left(&hex, p->precision))
 			return (NULL);
+	}
 	tmp = hex;
 	if (p->flags & ALTFORM)
 	{

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:43:19 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 13:58:42 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:13:33 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ char	*format_unsigned_decimal(t_printable *p)
 	if (!str)
 		return (NULL);
 	if (p->precision != -1)
+	{
+		p->flags &= ~ZEROPAD;
 		if (!pad_left(&str, p->precision))
 			return (NULL);
+	}
 	tmp = pad_printable(p, num_prefix(p->flags, 0), str);
 	free(str);
 	return (tmp);
