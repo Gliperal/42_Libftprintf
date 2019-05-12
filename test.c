@@ -351,7 +351,7 @@ void field_width()
 //	printf("[%10f]\n", 42.42);
 	ft_printf("[%10%]\n");
 	printf("[%10%]\n");
-
+/*
 	ft_printf("[%010d]\n", -42);
 	printf("[%010d]\n", -42);
 	ft_printf("[%0+10d]\n", -42);
@@ -398,7 +398,7 @@ void field_width()
 	printf("[%03.4u]\n", 42);
 	ft_printf("[%3s]\n", "abcd");
 	printf("[%3s]\n", "abcd");
-
+*/
 	/* I'm just not gonna worry about fied width / precision above INT_MAX - 1 (2147483646) */
 	//printf("[%18446744073709551615d]\n", 1);
 	//printf("[%9750000000000000000d]\n", 1);
@@ -534,7 +534,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {18, 19, -1};
+	int tests[] = {18, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

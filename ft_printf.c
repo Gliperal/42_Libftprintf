@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 15:35:45 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:24:10 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ int	write_printable(t_list *printable)
 	int			len;
 
 	p = (t_printable *)printable->content;
-	if (p && p->data)
+	if (p)
 	{
+		if (!p->data && (p->type != '%'))
+			return (0);
 		formatter = formatter_for_type(p->type);
 		if (formatter)
 		{

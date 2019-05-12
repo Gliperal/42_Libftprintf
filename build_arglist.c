@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 12:43:14 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 14:19:37 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,10 @@ int			withdraw_args(t_arglist *arglist, va_list ap)
 	{
 		arg = arglist->args[i];
 		reader = reader_for_size(arg->type);
-		if (reader == NULL)
-			return (0);
-		arg->data = (*reader)(ap);
+		if (reader)
+			arg->data = (*reader)(ap);
+		else
+			arg->data = NULL;
 		i++;
 	}
 	return (1);
