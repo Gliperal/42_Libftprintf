@@ -6,11 +6,30 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:13:24 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:48:22 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+int		pad_left(char **str, size_t width)
+{
+	size_t	len;
+	char	*newstr;
+
+	len = ft_strlen(*str);
+	if (len < width)
+	{
+		newstr = malloc(width * sizeof(char));
+		if (!newstr)
+			return (0);
+		ft_memset(newstr, '0', width);
+		ft_strcpy(newstr + width - len, *str);
+		free(*str);
+		*str = newstr;
+	}
+	return (1);
+}
 
 char	*num_prefix(char flags, int negative)
 {

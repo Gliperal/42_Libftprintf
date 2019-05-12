@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:01:48 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:48:06 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@ char	*format_decimal(t_printable *p)
 	str = ft_itoa_base_u(ft_abs(n), "0123456789");
 	if (!str)
 		return (NULL);
-	if (p->flags & ALTFORM)
-	{
-		tmp = ft_strsum("0", str);
-		free(str);
-		str = tmp;
-	}
+	if (p->precision != -1)
+		if (!pad_left(&str, p->precision))
+			return (NULL);
 	tmp = pad_printable(p, num_prefix(p->flags, n < 0), str);
 	free(str);
 	return (tmp);

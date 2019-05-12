@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 11:56:49 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:47:30 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ t_reader	reader_for_type(char type, char modifier);
 t_formatter	formatter_for_type(char type);
 char		*pad_printable(t_printable *p, const char *prefix, const char *str);
 char		*num_prefix(char flags, int negative);
+int			pad_left(char **str, size_t width);
 
 int	ft_printf(const char *format, ...);
 

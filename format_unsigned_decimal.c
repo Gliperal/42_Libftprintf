@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:43:19 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 14:46:08 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 12:54:21 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*format_unsigned_decimal(t_printable *p)
 {
 	char *str;
-	char *ostr;
 	unsigned long long n;
 
 	if (p->modifier == MOD_HH)
@@ -31,11 +30,8 @@ char	*format_unsigned_decimal(t_printable *p)
 	str = ft_itoa_base_u(n, "0123456789");
 	if (!str)
 		return (NULL);
-	if (p->flags & ALTFORM)
-	{
-		ostr = ft_strsum("0", str);
-		free(str);
-		return (ostr);
-	}
+	if (p->precision != -1)
+		if (!pad_left(&str, p->precision))
+			return (NULL);
 	return (str);
 }

@@ -338,12 +338,12 @@ void field_width()
 	printf("[%0 10d]\n", 42);
 	ft_printf("[%010.4d]\n", 42);
 	printf("[%010.4d]\n", 42);
-//	ft_printf("[%010.4u]\n", 42);
-//	printf("[%010.4u]\n", 42);
-//	ft_printf("[%010.0u]\n", 42);
-//	printf("[%010.0u]\n", 42);
-//	ft_printf("[%10s]\n", "abcd");
-//	printf("[%10s]\n", "abcd");
+	ft_printf("[%010.4u]\n", 42);
+	printf("[%010.4u]\n", 42);
+	ft_printf("[%010.0u]\n", 42);
+	printf("[%010.0u]\n", 42);
+	ft_printf("[%10s]\n", "abcd");
+	printf("[%10s]\n", "abcd");
 
 	ft_printf("[%-10d]\n", -42);
 	printf("[%-10d]\n", -42);
@@ -355,10 +355,10 @@ void field_width()
 	printf("[%- 10d]\n", 42);
 	ft_printf("[%-10.4d]\n", 42);
 	printf("[%-10.4d]\n", 42);
-//	ft_printf("[%-10.4u]\n", 42);
-//	printf("[%-10.4u]\n", 42);
-//	ft_printf("[%-10s]\n", "abcd");
-//	printf("[%-10s]\n", "abcd");
+	ft_printf("[%-10.4u]\n", 42);
+	printf("[%-10.4u]\n", 42);
+	ft_printf("[%-10s]\n", "abcd");
+	printf("[%-10s]\n", "abcd");
 
 	ft_printf("[%02d]\n", -42);
 	printf("[%02d]\n", -42);
@@ -370,10 +370,14 @@ void field_width()
 	printf("[%0 2d]\n", 42);
 	ft_printf("[%03.4d]\n", 42);
 	printf("[%03.4d]\n", 42);
-//	ft_printf("[%03.4u]\n", 42);
-//	printf("[%03.4u]\n", 42);
-//	ft_printf("[%3s]\n", "abcd");
-//	printf("[%3s]\n", "abcd");
+	ft_printf("[%03.4u]\n", 42);
+	printf("[%03.4u]\n", 42);
+	ft_printf("[%3s]\n", "abcd");
+	printf("[%3s]\n", "abcd");
+
+	/* I'm just not gonna worry about fied width / precision above INT_MAX - 1 (2147483646) */
+	//printf("[%18446744073709551615d]\n", 1);
+	//printf("[%9750000000000000000d]\n", 1);
 }
 
 
@@ -381,16 +385,88 @@ void field_width()
 
 void precision()
 {
-	ft_printf("[%s]\n", "Hello world.");
-	ft_printf("[%.s]\n", "Hello world.");
-	ft_printf("[%.0s]\n", "Hello world.");
-	ft_printf("[%.4s]\n", "Hello world.");
+	ft_printf("%s\n", "Hello world.");
+	printf("%s\n", "Hello world.");
+	ft_printf("%.s\n", "Hello world.");
+	printf("%.s\n", "Hello world.");
+	ft_printf("%.0s\n", "Hello world.");
+	printf("%.0s\n", "Hello world.");
+	ft_printf("%.4s\n", "Hello world.");
+	printf("%.4s\n", "Hello world.");
+
+	ft_printf("%.0d\n", 42);
+	printf("%.0d\n", 42);
+	ft_printf("%.1d\n", 42);
+	printf("%.1d\n", 42);
+	ft_printf("%.2d\n", 42);
+	printf("%.2d\n", 42);
+	ft_printf("%.3d\n", 42);
+	printf("%.3d\n", 42);
+	ft_printf("%.10d\n", 42);
+	printf("%.10d\n", 42);
+
+	ft_printf("%.0d\n", -42);
+	printf("%.0d\n", -42);
+	ft_printf("%.1d\n", -42);
+	printf("%.1d\n", -42);
+	ft_printf("%.2d\n", -42);
+	printf("%.2d\n", -42);
+	ft_printf("%.3d\n", -42);
+	printf("%.3d\n", -42);
+	ft_printf("%.10d\n", -42);
+	printf("%.10d\n", -42);
+
+	ft_printf("%.0i\n", 42);
+	printf("%.0i\n", 42);
+	ft_printf("%.2i\n", 42);
+	printf("%.2i\n", 42);
+	ft_printf("%.4i\n", 42);
+	printf("%.4i\n", 42);
+
+	ft_printf("%.0o\n", 34);
+	printf("%.0o\n", 34);
+	ft_printf("%.2o\n", 34);
+	printf("%.2o\n", 34);
+	ft_printf("%.4o\n", 34);
+	printf("%.4o\n", 34);
+	ft_printf("%#.4o\n", 34);
+	printf("%#.4o\n", 34);
+	ft_printf("%#.3o\n", 34);
+	printf("%#.3o\n", 34);
+	ft_printf("%#.2o\n", 34);
+	printf("%#.2o\n", 34);
+
+	ft_printf("%.0u\n", 42);
+	printf("%.0u\n", 42);
+	ft_printf("%.2u\n", 42);
+	printf("%.2u\n", 42);
+	ft_printf("%.4u\n", 42);
+	printf("%.4u\n", 42);
+
+	ft_printf("%.0x\n", 66);
+	printf("%.0x\n", 66);
+	ft_printf("%.2x\n", 66);
+	printf("%.2x\n", 66);
+	ft_printf("%.4x\n", 66);
+	printf("%.4x\n", 66);
+
+	ft_printf("%.0X\n", 66);
+	printf("%.0X\n", 66);
+	ft_printf("%.2X\n", 66);
+	printf("%.2X\n", 66);
+	ft_printf("%.4X\n", 66);
+	printf("%.4X\n", 66);
+
+	ft_printf("%#.1x\n", 66);
+	printf("%#.1x\n", 66);
+	ft_printf("%#.2X\n", 66);
+	printf("%#.2X\n", 66);
+	ft_printf("%#.3x\n", 66);
+	printf("%#.3x\n", 66);
+	ft_printf("%#.8X\n", 66);
+	printf("%#.8X\n", 66);
 
 	// default precision for floats = 6
-	
-	/* I'm just not gonna worry about fied width / precision above INT_MAX - 1 (2147483646) */
-	//printf("[%18446744073709551615d]\n", 1);
-	//printf("[%9750000000000000000d]\n", 1);
 }
 
 
@@ -434,7 +510,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {18, -1};
+	int tests[] = {19, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{
