@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 11:51:04 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 12:15:05 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/12 16:04:50 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ ARGSIZE	size_int(char modifier)
 	return (SIZE_INT);
 }
 
-ARGSIZE	size_float(char modifier)
+ARGSIZE	size_double(char modifier)
 {
 	if (modifier == MOD_LL)
-		return (SIZE_LONGLONG);
-	return (SIZE_LONG);
+		return (SIZE_LONGDOUBLE);
+	return (SIZE_DOUBLE);
 }
 
 ARGSIZE	size_ptr(char modifier)
