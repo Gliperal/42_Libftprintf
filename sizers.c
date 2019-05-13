@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 11:51:04 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 16:04:50 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:52:36 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ ARGSIZE	size_int(char modifier)
 
 ARGSIZE	size_double(char modifier)
 {
-	if (modifier == MOD_LL)
+	if (modifier == MOD_LD)
 		return (SIZE_LONGDOUBLE);
 	return (SIZE_DOUBLE);
 }

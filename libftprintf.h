@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 16:07:24 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:53:05 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define MOD_HH 2
 # define MOD_L 3
 # define MOD_LL 4
+# define MOD_LD 5
 
 # define BOOL char
 # define ARG 1
@@ -122,8 +123,8 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {'d', &size_int, &format_decimal},
 	(t_type_formatter) {'e', &size_double, 0},
 	(t_type_formatter) {'E', &size_double, 0},
-	(t_type_formatter) {'f', &size_double, 0},
-	(t_type_formatter) {'F', &size_double, 0},
+	(t_type_formatter) {'f', &size_double, &format_double},
+	(t_type_formatter) {'F', &size_double, &format_double},
 	(t_type_formatter) {'g', &size_double, 0},
 	(t_type_formatter) {'G', &size_double, 0},
 	(t_type_formatter) {'i', &size_int, &format_decimal},

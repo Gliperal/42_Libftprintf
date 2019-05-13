@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 13:49:03 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/13 15:56:34 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,12 @@ static void	pop_width_and_precision(const char **format, t_printable *p)
 
 static char	pop_modifier(const char **format)
 {
-	if (**format == 'h')
+	if (**format == 'L')
+	{
+		*format = *format + 1;
+		return (MOD_LD);
+	}
+	else if (**format == 'h')
 	{
 		*format = *format + 1;
 		if (**format == 'h')

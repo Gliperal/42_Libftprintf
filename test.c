@@ -192,6 +192,15 @@ void hexadecimal()
 }
 
 
+/* Double precision floating point tests */
+
+void floats()
+{
+	ft_printf("%f\n", 42.42);
+	printf("%f\n", 42.42);
+}
+
+
 /* Format string tests */
 
 void format_string()
@@ -305,6 +314,15 @@ void hexadecimal_f()
 	printf("[%0#10x]\n", 42);
 	ft_printf("[%0#10.6x]\n", 42);
 	printf("[%0#10.6x]\n", 42);
+}
+
+
+/* Double precision floating point format tests */
+
+void floats_f()
+{
+	ft_printf("%Lf\n", (long double) 42.42);
+	printf("%Lf\n", (long double) 42.42);
 }
 
 
@@ -526,24 +544,26 @@ static const t_group g_test_groups[] =
 	/*  5 */	&octal,
 	/*  6 */	&unsigned_decimal,
 	/*  7 */	&hexadecimal,
-	/*  8 */	&format_string,
-	/*  9 */	&char_f,
-	/* 10 */	&string_f,
-	/* 11 */	&pointer_f,
-	/* 12 */	&decimal_f,
-	/* 13 */	&octal_f,
-	/* 14 */	&unsigned_f,
-	/* 15 */	&hexadecimal_f,
-	/* 16 */	&flags,
-	/* 17 */	&flags2,
-	/* 18 */	&field_width,
-	/* 19 */	&precision,
-	/* 20 */	&aa
+	/*  8 */	&floats,
+	/*  9 */	&format_string,
+	/* 10 */	&char_f,
+	/* 11 */	&string_f,
+	/* 12 */	&pointer_f,
+	/* 13 */	&decimal_f,
+	/* 14 */	&octal_f,
+	/* 15 */	&unsigned_f,
+	/* 16 */	&hexadecimal_f,
+	/* 17 */	&floats_f,
+	/* 18 */	&flags,
+	/* 19 */	&flags2,
+	/* 20 */	&field_width,
+	/* 21 */	&precision,
+	/* 22 */	&aa
 };
 
 int main()
 {
-	int tests[] = {11, 15, 18, 19, -1};
+	int tests[] = {8, 17, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{
