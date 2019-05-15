@@ -194,10 +194,29 @@ void hexadecimal()
 
 /* Double precision floating point tests */
 
+double	make_double(long data)
+{
+	double result;
+	ft_memcpy(&result, &data, sizeof(double));
+	return (result);
+}
+
 void floats()
 {
 	ft_printf("%f\n", 42.42);
 	printf("%f\n", 42.42);
+
+	double double_max = make_double(0x7fefffffffffffff);
+	ft_printf("%f\n", double_max);
+	printf("%f\n", double_max);
+	ft_printf("%Lf\n", (long double) double_max);
+	printf("%Lf\n", (long double) double_max);
+	double double_min = make_double(0x0010000000000000);
+	ft_printf("%.1050f\n", double_min);
+	printf("%.1050f\n", double_min);
+	double subnormal_min = make_double(0x0000000000000001);
+	ft_printf("%.1100f\n", subnormal_min);
+	printf("%.1100f\n", subnormal_min);
 }
 
 
@@ -563,7 +582,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {8, 17, -1};
+	int tests[] = {8, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{
