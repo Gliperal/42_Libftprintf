@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:55:08 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 16:00:04 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 16:15:07 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 t_float	*parse_double(double d)
 {
-	char *data;
+	char	*data;
+	t_float	*f;
 
-	t_float *f = (t_float *)malloc(sizeof(t_float));
+	f = (t_float *)malloc(sizeof(t_float));
 	if (!f)
 		return (NULL);
 	data = (char *)(void *)&d;
@@ -27,15 +28,16 @@ t_float	*parse_double(double d)
 	f->exponent = *((short *)(data + 6)) >> 4;
 	f->exponent -= 1023;
 	f->significand = *((long *)data) & 0xfffffffffffff;
-	f->significand |= (long) 1 << 52;
+	f->significand |= (long)1 << 52;
 	return (f);
 }
 
 t_float	*parse_longdouble(long double d)
 {
-	char *data;
+	char	*data;
+	t_float	*f;
 
-	t_float *f = (t_float *)malloc(sizeof(t_float));
+	f = (t_float *)malloc(sizeof(t_float));
 	if (!f)
 		return (NULL);
 	data = (char *)(void *)&d;

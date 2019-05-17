@@ -6,15 +6,13 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 14:02:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/11 15:45:37 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 16:18:10 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-// TODO Remove
-#include <stdio.h>
 
-static int read_text(const char **format, t_list *printables)
+static int	read_text(const char **format, t_list *printables)
 {
 	const char	*start;
 	t_list		*elem;

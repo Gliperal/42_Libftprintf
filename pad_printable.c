@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 12:48:22 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 16:17:34 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int		pad_left(char **str, size_t width)
 char	*num_prefix(char flags, int negative)
 {
 	if (negative)
-		return "-";
+		return ("-");
 	else if (flags & SIGNSPACE)
-		return " ";
+		return (" ");
 	else if (flags & SIGNFORCE)
-		return "+";
+		return ("+");
 	else
-		return "";
+		return ("");
 }
 
 char	*pad_printable(t_printable *p, const char *prefix, const char *str)
