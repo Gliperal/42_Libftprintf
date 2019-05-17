@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/13 15:53:05 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/16 20:36:24 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "argsize.h"
 #include "readers.h"
 #include "sizers.h"
+#include "exact_float.h"
 
 # define MOD_H 1
 # define MOD_HH 2
