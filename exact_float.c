@@ -6,16 +6,14 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:25:37 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 13:50:52 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:57:28 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exact_float.h"
 #include "float.h"
 
-typedef unsigned int	t_ui;
-
-static unsigned int		*clone_array(t_ui *arr, int size, int resize, int off)
+static unsigned int		*clone_integer(unsigned int *arr, int size, int resize)
 {
 	unsigned int	*newarr;
 	int				i;
@@ -28,8 +26,30 @@ static unsigned int		*clone_array(t_ui *arr, int size, int resize, int off)
 	i = 0;
 	while (i < resize)
 	{
-		if (i >= off && i < size + off)
-			newarr[i] = arr[i - off];
+		if (i < size)
+			newarr[resize - 1 - i] = arr[i];
+		else
+			newarr[resize - 1 - i] = 0;
+		i++;
+	}
+	return (newarr);
+}
+
+static unsigned int		*clone_fraction(unsigned int *arr, int size, int resize)
+{
+	unsigned int	*newarr;
+	int				i;
+
+	if (resize <= 0)
+		return (NULL);
+	newarr = malloc(resize * sizeof(int));
+	if (!newarr)
+		return (NULL);
+	i = 0;
+	while (i < resize)
+	{
+		if (i >= resize - size)
+			newarr[i] = arr[i + size - resize];
 		else
 			newarr[i] = 0;
 		i++;
@@ -47,7 +67,7 @@ static t_exact_float	*tfloat_to_exact_float(t_float *f)
 
 	exp = f->exponent;
 	shift = (exp >= 0) ? exp % 32 : (exp % 32) + 32;
-	sig[0] = (unsigned int)(f->significand >> (64 - shift));
+	sig[0] = (unsigned int)(f->significand >> 32 >> (32 - shift));
 	sig[1] = (unsigned int)(f->significand >> (32 - shift));
 	sig[2] = (unsigned int)(f->significand << shift);
 	exp = (exp - shift) / 32;
@@ -60,9 +80,8 @@ static t_exact_float	*tfloat_to_exact_float(t_float *f)
 		ef->integer.size = 0;
 	if (ef->fraction.size < 0)
 		ef->fraction.size = 0;
-	ef->integer.value = clone_array(sig, 3, ef->integer.size, 0);
-	offset = ef->fraction.size - 3;
-	ef->fraction.value = clone_array(sig, 3, ef->fraction.size, offset);
+	ef->integer.value = clone_integer(sig, 3, ef->integer.size);
+	ef->fraction.value = clone_fraction(sig, 3, ef->fraction.size);
 	return (ef);
 }
 

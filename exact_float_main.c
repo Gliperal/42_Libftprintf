@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "exact_float.h"
+#include "libft.h"
 
 void test(double d, int precision)
 {
@@ -25,4 +26,13 @@ int main()
 	double d = (double) 9.9999815;
 	test(d, 6);
 	printf("%.6f\n", d);
+
+
+
+
+	double double_max;
+	long data = 0x7fefffffffffffff;
+	ft_memcpy(&double_max, &data, sizeof(double));
+	test(double_max, 6);
+	printf("%f\n", double_max);
 }

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:42:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 14:19:32 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:35:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static unsigned int	multiply(t_big_fraction *n, unsigned int multiplicand)
 	unsigned long	product;
 	unsigned int	carry;
 
+	if (is_zero(n))
+		return (0);
 	i = n->size - 1;
 	carry = 0;
 	while (i >= 0)
@@ -80,8 +82,6 @@ char				*fraction_to_string(t_big_fraction *n, int precision)
 
 	if (!n)
 		return (NULL);
-	if (is_zero(n))
-		return (ft_strdup("0"));
 	str = ft_strnew(precision);
 	if (!str)
 		return (NULL);
