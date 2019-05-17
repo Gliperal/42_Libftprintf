@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 15:37:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/14 21:33:19 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/16 19:00:18 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,20 @@ t_number	*new_zero(int size_in_ints)
 	ft_bzero(n->value, size_in_ints * sizeof(int));
 	n->size = size_in_ints;
 	return (n);
+}
+
+int		is_zero(t_number *n)
+{
+	int i;
+
+	i = 0;
+	while (i < n->size)
+	{
+		if (n->value[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	expand_to(t_number *n, int new_size)
@@ -180,4 +194,53 @@ t_number	*multiply(t_number *n1, t_number *n2)
 		i++;
 	}
 	return (result);
+}
+
+unsigned int	divide(t_number *n, unsigned int divisor)
+{
+	int i;
+	unsigned int dividend;
+	unsigned int quotient;
+	unsigned long remainder;
+
+	remainder = 0;
+	i = n->size - 1;
+	while (i >= 0)
+	{
+		dividend = n->value[i];
+		quotient = ((unsigned long) dividend + (remainder << 32)) / divisor;
+		remainder = n->value[i] - quotient * divisor;
+		n->value[i] = quotient;
+		i--;
+	}
+	return (remainder);
+}
+
+/*
+** new size = 10 * size because 10 is about 32 * ln(2) / ln(10)
+*/
+
+char	*to_string(t_number *n)
+{
+	char *str;
+	int length;
+	int i;
+
+	if (!n)
+		return (NULL);
+	if (is_zero(n))
+		return (ft_strdup("0"));
+	length = 10 * n->size;
+	str = ft_strnew(length);
+	if (!str)
+		return (NULL);
+	i = length;
+	while (i > 0 && !is_zero(n))
+	{
+		i--;
+		str[i] = '0' + divide(n, 10);
+	}
+	ft_memmove(str, str + i, length - i);
+	str[length - i] = 0;
+	return (str);
 }

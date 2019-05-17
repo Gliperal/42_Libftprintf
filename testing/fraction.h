@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   number.h                                           :+:      :+:    :+:   */
+/*   fraction.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 15:36:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/16 19:00:55 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/16 19:09:24 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NUMBER_H
-# define NUMBER_H
+#ifndef FRACTION_H
+# define FRACTION_H
 
-typedef struct	s_number
+typedef struct	s_fraction
 {
 	int			*value;
 	int			size;
-}				t_number;
+}				t_fraction;
 
-t_number	*new_number(unsigned int *value, int size_in_ints);
-int		is_zero(t_number *n);
-int	expand_to(t_number *n, int new_size);
-int	left_shift(t_number *n, int amount);
-void	add(t_number *n, t_number *increase);
-t_number	*multiply(t_number *n1, t_number *n2);
-unsigned int		divide(t_number *n, unsigned int divisor);
-char	*to_string(t_number *n);
+t_fraction	*new_fraction(unsigned int *value, int size_in_ints);
+int		is_zero_f(t_fraction *n);
+unsigned int	multiply_f(t_fraction *n, unsigned int multiplicand);
+char	*to_string_f(t_fraction *n, int precision);
 
 #endif
