@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:55:08 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/13 14:56:38 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 16:00:04 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,10 @@ t_float	*parse_longdouble(long double d)
 	f->exponent -= 16383;
 	f->significand = *(long *)data;
 	return (f);
+}
+
+void	del_float(t_float **f)
+{
+	free(*f);
+	*f = NULL;
 }

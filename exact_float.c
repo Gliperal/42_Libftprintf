@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:25:37 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 14:57:28 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 16:00:40 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static t_exact_float	*tfloat_to_exact_float(t_float *f)
 	int				exp;
 	int				shift;
 	unsigned int	sig[3];
-	int				offset;
 
 	exp = f->exponent;
 	shift = (exp >= 0) ? exp % 32 : (exp % 32) + 32;
@@ -87,26 +86,42 @@ static t_exact_float	*tfloat_to_exact_float(t_float *f)
 
 t_exact_float			*double_to_exact_float(double d)
 {
-	t_float *f;
+	t_exact_float	*ef;
+	t_float			*f;
 
 	f = parse_double(d);
 	if (f)
 	{
 		f->exponent -= 52;
-		return (tfloat_to_exact_float(f));
+		ef = tfloat_to_exact_float(f);
+		if (ef)
+		{
+			ef->integer_str = NULL;
+			ef->fraction_str = NULL;
+		}
+		del_float(&f);
+		return (ef);
 	}
 	return (NULL);
 }
 
 t_exact_float			*longdouble_to_exact_float(long double d)
 {
-	t_float *f;
+	t_exact_float	*ef;
+	t_float			*f;
 
 	f = parse_longdouble(d);
 	if (f)
 	{
 		f->exponent -= 63;
-		return (tfloat_to_exact_float(f));
+		ef = tfloat_to_exact_float(f);
+		if (ef)
+		{
+			ef->integer_str = NULL;
+			ef->fraction_str = NULL;
+		}
+		del_float(&f);
+		return (ef);
 	}
 	return (NULL);
 }

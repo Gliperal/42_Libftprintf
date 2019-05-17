@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:52:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/14 14:12:20 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 15:57:56 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,19 +93,54 @@ char	*thing(double d)
 	return (str);
 }
 
+void	print_number(t_big_integer *n)
+{
+	if (!n || !(n->value))
+	{
+		printf("(NULL)\n");
+		return ;
+	}
+	for (int i = n->size - 1; i >= 0; i--)
+		printf("%.8x", n->value[i]);
+	printf("\n");
+}
+
+void	print_fraction(t_big_fraction *n)
+{
+	if (!n || !(n->value))
+	{
+		printf("(NULL)\n");
+		return ;
+	}
+	for (int i = n->size - 1; i >= 0; i--)
+		printf("%.8x", n->value[i]);
+	printf("\n");
+}
+
+void	free_stuff(t_exact_float *f)
+{
+	free(f->integer.value);
+	free(f->fraction.value);
+	free(f->integer_str);
+	free(f->fraction_str);
+	free(f);
+}
+
 char	*format_double(t_printable *p)
 {
-	t_float *d;
+	t_exact_float *f;
+	char *str;
 
 	if (p->modifier == MOD_LD)
-		d = parse_longdouble(*(long double *)p->data);
+		f = longdouble_to_exact_float(*(long double *)p->data);
 	else
-		d = parse_double(*(double *)p->data);
-	if (d == NULL)
+		f = double_to_exact_float(*(double *)p->data);
+	if (f == NULL)
 		return (NULL);
-//	printf("[type %c sign %d exp %d significand %lu]", d->type, d->sign, d->exponent, d->significand);
-	if (d->type == 'd')
-		return thing(*(double *)p->data);
+	if (p->type == 'f' || p->type == 'F')
+		str = format_f(f, p->precision, p->flags);
 	else
-		return (NULL);
+		str = NULL;
+	free_stuff(f);
+	return (str);
 }
