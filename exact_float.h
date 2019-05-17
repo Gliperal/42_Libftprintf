@@ -6,14 +6,14 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:12:54 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 13:22:48 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:16:25 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXACT_FLOAT_H
 # define EXACT_FLOAT_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 typedef struct		s_big_integer
 {

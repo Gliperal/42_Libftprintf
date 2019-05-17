@@ -217,6 +217,7 @@ void floats()
 	double subnormal_min = make_double(0x0000000000000001);
 	ft_printf("%.1100f\n", subnormal_min);
 	printf("%.1100f\n", subnormal_min);
+	// Awkward precision tests: 2.9(9), 9.8(9), 0.0(5), etc.
 }
 
 

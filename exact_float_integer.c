@@ -6,15 +6,17 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 15:37:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/16 20:33:56 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 14:19:41 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exact_float.h"
+#include "libft.h"
 
-t_big_integer	*new_integer(unsigned int *value, int size_in_ints)
+t_big_integer		*new_integer(unsigned int *value, int size_in_ints)
 {
-	t_big_integer *n;
+	t_big_integer	*n;
+	int				i;
 
 	n = (t_big_integer *)malloc(sizeof(t_big_integer));
 	if (!n)
@@ -26,16 +28,22 @@ t_big_integer	*new_integer(unsigned int *value, int size_in_ints)
 		return (NULL);
 	}
 	n->size = size_in_ints;
-	for(int i = 0; i < size_in_ints; i++)
+	i = 0;
+	while (i < size_in_ints)
+	{
 		n->value[i] = value[size_in_ints - 1 - i];
+		i++;
+	}
 	return (n);
 }
 
-static int		is_zero(t_big_integer *n)
+static int			is_zero(t_big_integer *n)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (n->size <= 0)
+		return (1);
 	while (i < n->size)
 	{
 		if (n->value[i])
@@ -47,17 +55,17 @@ static int		is_zero(t_big_integer *n)
 
 static unsigned int	divide(t_big_integer *n, unsigned int divisor)
 {
-	int i;
-	unsigned int dividend;
-	unsigned int quotient;
-	unsigned long remainder;
+	int				i;
+	unsigned int	dividend;
+	unsigned int	quotient;
+	unsigned long	remainder;
 
 	remainder = 0;
 	i = n->size - 1;
 	while (i >= 0)
 	{
 		dividend = n->value[i];
-		quotient = ((unsigned long) dividend + (remainder << 32)) / divisor;
+		quotient = ((unsigned long)dividend + (remainder << 32)) / divisor;
 		remainder = n->value[i] - quotient * divisor;
 		n->value[i] = quotient;
 		i--;
@@ -65,11 +73,11 @@ static unsigned int	divide(t_big_integer *n, unsigned int divisor)
 	return (remainder);
 }
 
-char	*integer_to_string(t_big_integer *n)
+char				*integer_to_string(t_big_integer *n)
 {
-	char *str;
-	int length;
-	int i;
+	char	*str;
+	int		length;
+	int		i;
 
 	if (!n)
 		return (NULL);
