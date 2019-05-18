@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:52:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 19:26:50 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:56:40 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*format_double(t_printable *p)
 	t_exact_float	*f;
 	char			*str;
 
-	str = NULL;
 	if (p->modifier == MOD_LD)
 		f = longdouble_to_exact_float(*(long double *)p->data);
 	else
@@ -38,8 +37,14 @@ char	*format_double(t_printable *p)
 	if (!str)
 	{
 		if (p->type == 'f' || p->type == 'F')
-			str = format_f(f, p->precision, p->flags);
+			str = format_f(f, p);
 	}
+	if (!str)
+		return (NULL);
+	if (p->type >= 'a' && p->type <= 'z')
+		ft_make_lowercase(str);
+	else
+		ft_make_uppercase(str);
 	free_exact_float(f);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 16:17:34 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 12:28:08 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		pad_left(char **str, size_t width)
 	size_t	len;
 	char	*newstr;
 
+	if (!str || !(*str))
+		return (0);
 	len = ft_strlen(*str);
 	if (len < width)
 	{
