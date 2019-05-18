@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:25:37 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 16:00:40 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:11:11 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_exact_float			*double_to_exact_float(double d)
 			ef->integer_str = NULL;
 			ef->fraction_str = NULL;
 		}
+		ef->type = f->type;
+		ef->sign = f->sign;
 		del_float(&f);
 		return (ef);
 	}
@@ -120,6 +122,8 @@ t_exact_float			*longdouble_to_exact_float(long double d)
 			ef->integer_str = NULL;
 			ef->fraction_str = NULL;
 		}
+		ef->type = f->type;
+		ef->sign = f->sign;
 		del_float(&f);
 		return (ef);
 	}

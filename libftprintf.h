@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 15:26:18 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:09:42 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char	*format_double(t_printable *p);
 char	*format_e(t_exact_float *n, int precision, char flags);
 char	*format_f(t_exact_float *n, int precision, char flags);
 char	*format_g(t_exact_float *n, int precision, char flags);
+char	*format_special(t_exact_float *n, char flags);
 
 static const t_type_formatter g_type_formatters[] =
 {

@@ -6,12 +6,26 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 15:47:04 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 19:25:45 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "exact_float.h"
+
+char	*format_special(t_exact_float *n, char flags)
+{
+	if (n->type == 'i')
+	{
+		if (n->sign == 1)
+			return (ft_strdup("inf"));
+		else
+			return (ft_strdup("-inf"));
+	}
+	else if (n->type == 'n')
+		return (ft_strdup("NaN"));
+	return (NULL);
+}
 
 char	*format_e(t_exact_float *n, int precision, char flags)
 {

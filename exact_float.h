@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:12:54 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 14:16:25 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/17 18:10:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct		s_big_fraction
 
 typedef struct		s_exact_float
 {
+	char			type;
+	char			sign;
 	t_big_integer	integer;
 	t_big_fraction	fraction;
 	char			*integer_str;

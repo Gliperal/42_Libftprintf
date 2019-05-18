@@ -201,6 +201,16 @@ double	make_double(long data)
 	return (result);
 }
 
+long double	make_longdouble(unsigned long data1, unsigned long data2)
+{
+	unsigned long data[2];
+	data[0] = data2;
+	data[1] = data1;
+	long double result;
+	ft_memcpy(&result, data, sizeof(long double));
+	return (result);
+}
+
 void floats()
 {
 	ft_printf("%f\n", 42.42);
@@ -209,15 +219,84 @@ void floats()
 	double double_max = make_double(0x7fefffffffffffff);
 	ft_printf("%f\n", double_max);
 	printf("%f\n", double_max);
-	ft_printf("%Lf\n", (long double) double_max);
-	printf("%Lf\n", (long double) double_max);
 	double double_min = make_double(0x0010000000000000);
 	ft_printf("%.1050f\n", double_min);
 	printf("%.1050f\n", double_min);
-	double subnormal_min = make_double(0x0000000000000001);
+	double positive_zero = make_double(0x0000000000000000);
+	ft_printf("%f\n", positive_zero);
+	printf("%f\n", positive_zero);
+	double negative_zero = make_double(0x8000000000000000);
+	ft_printf("%f\n", negative_zero);
+	printf("%f\n", negative_zero);
+	double subnormal_min = make_double(0x8000000000000001);
 	ft_printf("%.1100f\n", subnormal_min);
 	printf("%.1100f\n", subnormal_min);
-	// Awkward precision tests: 2.9(9), 9.8(9), 0.0(5), etc.
+	double subnormal_max = make_double(0x0001111111111111);
+	ft_printf("%.1100f\n", subnormal_max);
+	printf("%.1100f\n", subnormal_max);
+	double positive_inf = make_double(0x7ff0000000000000);
+	ft_printf("%f\n", positive_inf);
+	printf("%f\n", positive_inf);
+	double negative_inf = make_double(0xfff0000000000000);
+	ft_printf("%f\n", negative_inf);
+	printf("%f\n", negative_inf);
+	double nan = make_double(0xffffffffffffffff);
+	ft_printf("%f\n", nan);
+	printf("%f\n", nan);
+
+	long double longdouble_max = make_longdouble(0x0000000000007ffe, 0xffffffffffffffff);
+	ft_printf("%Lf\n", longdouble_max);
+	printf("%Lf\n", longdouble_max);
+	long double longdouble_min = make_longdouble(0x0000000000000001, 0x8000000000000001);
+	ft_printf("%.17000Lf\n", longdouble_min);
+	printf("%.17000Lf\n", longdouble_min);
+	long double pseudodenormal_min = make_longdouble(0x0000000000000000, 0x8000000000000001);
+	ft_printf("%.17000Lf\n", pseudodenormal_min);
+	printf("%.17000Lf\n", pseudodenormal_min);
+	long double denormal_min = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	ft_printf("%.17000Lf\n", denormal_min);
+	printf("%.17000Lf\n", denormal_min);
+	long double positive_longzero = make_longdouble(0x0000000000000000, 0x0000000000000001);
+	ft_printf("%Lf\n", positive_longzero);
+	printf("%Lf\n", positive_longzero);
+	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	ft_printf("%Lf\n", negative_longzero);
+	printf("%Lf\n", negative_longzero);
+
+	long double pos_pseudo_inf = make_longdouble(0x0000000000007fff, 0x0000000000000000);
+	ft_printf("%Lf\n", pos_pseudo_inf);
+	printf("%Lf\n", pos_pseudo_inf);
+	long double neg_pseudo_inf = make_longdouble(0x000000000000ffff, 0x0000000000000000);
+	ft_printf("%Lf\n", neg_pseudo_inf);
+	printf("%Lf\n", neg_pseudo_inf);
+	long double pos_long_inf = make_longdouble(0x0000000000007fff, 0x8000000000000000);
+	ft_printf("%Lf\n", pos_long_inf);
+	printf("%Lf\n", pos_long_inf);
+	long double neg_long_inf = make_longdouble(0x000000000000ffff, 0x8000000000000000);
+	ft_printf("%Lf\n", neg_long_inf);
+	printf("%Lf\n", neg_long_inf);
+
+	long double longnan1 = make_longdouble(0x0000000000007fff, 0x0000000000000001);
+	ft_printf("%Lf\n", longnan1);
+	printf("%Lf\n", longnan1);
+	long double longnan2 = make_longdouble(0x0000000000007fff, 0x4000000000000000);
+	ft_printf("%Lf\n", longnan2);
+	printf("%Lf\n", longnan2);
+	long double longnan3 = make_longdouble(0x0000000000007fff, 0x7fffffffffffffff);
+	ft_printf("%Lf\n", longnan3);
+	printf("%Lf\n", longnan3);
+	long double longnan4 = make_longdouble(0x0000000000007fff, 0x8000000000000001);
+	ft_printf("%Lf\n", longnan4);
+	printf("%Lf\n", longnan4);
+	long double longnan5 = make_longdouble(0x0000000000007fff, 0xc000000000000000);
+	ft_printf("%Lf\n", longnan5);
+	printf("%Lf\n", longnan5);
+	long double longnan6 = make_longdouble(0x0000000000007fff, 0xc000000000000001);
+	ft_printf("%Lf\n", longnan6);
+	printf("%Lf\n", longnan6);
+
+	// Precision rounding tests: 2.9(9), 9.8(9), 0.0(5), etc.
+	// %e and %g tests (probably in their own functions)
 }
 
 
