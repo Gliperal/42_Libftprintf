@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:42:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 14:35:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 15:19:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,44 @@ char				*fraction_to_string(t_big_fraction *n, int precision)
 		str[i] = '0' + multiply(n, 10);
 		i++;
 	}
+	// TODO fix the round up
 	if (str[i - 1] != '9' && multiply(n, 10) > 4)
 		str[i - 1] = str[i - 1] + 1;
+	return (str);
+}
+
+/*
+** I would give this a more descriptive name if not for norm, but it basically ignores
+** leading zeros when counting the precision.
+*/
+
+char				*fraction_to_string2(t_big_fraction *n, int precision)
+{
+	char			*str;
+	int				leading_zeros;
+	unsigned int	digit;
+	int				i;
+
+	if (!n)
+		return (NULL);
+	leading_zeros = 0;
+	digit = multiply(n, 10);
+	while (!digit)
+	{
+		digit = multiply(n, 10);
+		leading_zeros++;
+	}
+	str = ft_strnew(leading_zeros + precision);
+	if (!str)
+		return (NULL);
+	ft_memset(str, '0', leading_zeros + precision);
+	str[leading_zeros] = '0' + digit;
+	i = 1;
+	while (i < precision)
+	{
+		str[leading_zeros + i] = '0' + multiply(n, 10);
+		i++;
+	}
+	// TODO round up
 	return (str);
 }

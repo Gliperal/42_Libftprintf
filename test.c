@@ -669,6 +669,52 @@ void aa()
 }
 
 
+/* Extended floats tests */
+
+void more_floats()
+{
+	ft_printf("%E\n", 4.2);
+	printf("%E\n", 4.2);
+	ft_printf("%e\n", 4200.0);
+	printf("%e\n", 4200.0);
+	ft_printf("%E\n", 0.0042);
+	printf("%E\n", 0.0042);
+	ft_printf("%e\n", 42.0);
+	printf("%e\n", 42.0);
+	ft_printf("%E\n", .42);
+	printf("%E\n", .42);
+
+	double double_max = make_double(0x7fefffffffffffff);
+	ft_printf("%E\n", double_max);
+	printf("%E\n", double_max);
+	double double_min = make_double(0x0010000000000000);
+	ft_printf("%.e\n", double_min);
+	printf("%.e\n", double_min);
+	double negative_zero = make_double(0x8000000000000000);
+	ft_printf("%e\n", negative_zero);
+	printf("%e\n", negative_zero);
+	double positive_inf = make_double(0x7ff0000000000000);
+	ft_printf("%e\n", positive_inf);
+	printf("%e\n", positive_inf);
+
+	long double longdouble_max = make_longdouble(0x0000000000007ffe, 0xffffffffffffffff);
+	ft_printf("%LE\n", longdouble_max);
+	printf("%LE\n", longdouble_max);
+	long double denormal_min = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	ft_printf("%Le\n", denormal_min);
+	printf("%Le\n", denormal_min);
+	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	ft_printf("%Le\n", negative_longzero);
+	printf("%Le\n", negative_longzero);
+	long double neg_long_inf = make_longdouble(0x000000000000ffff, 0x8000000000000000);
+	ft_printf("%LE\n", neg_long_inf);
+	printf("%LE\n", neg_long_inf);
+	long double longnan1 = make_longdouble(0x0000000000007fff, 0x0000000000000001);
+	ft_printf("%LE\n", longnan1);
+	printf("%LE\n", longnan1);
+}
+
+
 typedef void	(*t_group)(void);
 
 static const t_group g_test_groups[] =
@@ -695,12 +741,13 @@ static const t_group g_test_groups[] =
 	/* 19 */	&flags2,
 	/* 20 */	&field_width,
 	/* 21 */	&precision,
-	/* 22 */	&aa
+	/* 22 */	&aa,
+	/* 23 */	&more_floats
 };
 
 int main()
 {
-	int tests[] = {8, 17, -1};
+	int tests[] = {23, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 20:58:52 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:47:42 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,12 +127,12 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {'c', &size_char, &format_char},
 //	(t_type_formatter) {'C', 0, 0},
 	(t_type_formatter) {'d', &size_int, &format_decimal},
-	(t_type_formatter) {'e', &size_double, 0},
-	(t_type_formatter) {'E', &size_double, 0},
+	(t_type_formatter) {'e', &size_double, &format_double},
+	(t_type_formatter) {'E', &size_double, &format_double},
 	(t_type_formatter) {'f', &size_double, &format_double},
 	(t_type_formatter) {'F', &size_double, &format_double},
-	(t_type_formatter) {'g', &size_double, 0},
-	(t_type_formatter) {'G', &size_double, 0},
+	(t_type_formatter) {'g', &size_double, &format_double},
+	(t_type_formatter) {'G', &size_double, &format_double},
 	(t_type_formatter) {'i', &size_int, &format_decimal},
 	(t_type_formatter) {'o', &size_int, &format_octal},
 	(t_type_formatter) {'p', &size_ptr, &format_pointer},
