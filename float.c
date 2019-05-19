@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/13 14:55:08 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 19:37:53 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:07:54 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	check_long_specials(t_float *f)
 	}
 }
 
-t_float	*parse_double(double d)
+t_float		*parse_double(double d)
 {
 	char	*data;
 	t_float	*f;
@@ -70,7 +70,7 @@ t_float	*parse_double(double d)
 	return (f);
 }
 
-t_float	*parse_longdouble(long double d)
+t_float		*parse_longdouble(long double d)
 {
 	char	*data;
 	t_float	*f;
@@ -88,7 +88,7 @@ t_float	*parse_longdouble(long double d)
 	return (f);
 }
 
-void	del_float(t_float **f)
+void		del_float(t_float **f)
 {
 	free(*f);
 	*f = NULL;

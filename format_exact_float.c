@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 15:42:24 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 18:56:58 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,13 @@ char	*format_e(t_exact_float *n, t_printable *p)
 		n->integer_str = integer_to_string(&(n->integer));
 	if (!(n->integer_str))
 		return (NULL);
-	if (ft_strequ(n->integer_str, "0"))
-		n->fraction_str = fraction_to_string2(&(n->fraction), p->precision + 1);
-	else
-		n->fraction_str = fraction_to_string(&(n->fraction), p->precision);
+	if (!(n->fraction_str))
+	{
+		if (ft_strequ(n->integer_str, "0"))
+			n->fraction_str = fraction_to_string2(&(n->fraction), p->precision + 1);
+		else
+			n->fraction_str = fraction_to_string(&(n->fraction), p->precision);
+	}
 	if (!(n->fraction_str))
 		return (NULL);
 	str = ft_strsum(n->integer_str, n->fraction_str);
@@ -190,21 +193,57 @@ char	*format_f(t_exact_float *n, t_printable *p)
 	return (tmp);
 }
 
+/*
+static t_exact_float	*clone(t_exact_float *n)
+{
+	t_exact_float *n2;
+
+	n2 = malloc(sizeof(t_exact_float));
+	if (!n2)
+		return (NULL);
+	ft_memcpy(n2, n, sizeof(t_exact_float));
+	if (n->integer_str)
+		n2->integer_str = ft_strdup(n->integer_str);
+	if (n->fraction_str)
+		n2->fraction_str = ft_strdup(n->fraction_str);
+	n2->integer.value = malloc(n->integer.size * sizeof(int));
+	n2->fraction.value = malloc(n->fraction.size * sizeof(int));
+	if (!n2->integer.value || !n2->fraction.value)
+		return (NULL);
+	ft_memcpy(n2->integer.value, n->integer.value, n->integer.size * sizeof(int));
+	ft_memcpy(n2->fraction.value, n->fraction.value, n->fraction.size * sizeof(int));
+	return (n2);
+}
+*/
+
 char	*format_g(t_exact_float *n, t_printable *p)
 {
+/*	t_exact_float *n2;
+
+	n2 = clone(n);
+	if (!n2)
+		return (NULL);
 	if (p->precision == -1)
 		p->precision = 6;
 	if (p->precision == 0)
 		p->precision = 1;
-	n->integer_str = integer_to_string(&(n->integer));
-	if (!(n->integer_str))
+	n2->integer_str = integer_to_string(&(n2->integer));
+	if (!(n2->integer_str))
 		return (NULL);
-	if ((int) ft_strlen(n->integer_str) > p->precision)
+	if ((int)ft_strlen(n2->integer_str) > p->precision)
 		return (format_e(n, p));
-	n->fraction_str = fraction_to_string(&(n->fraction), p->precision + 1);
-	if (!(n->fraction_str))
+	if (!is_zero(n2) && ft_strequ(n2->integer_str, "0"))
+		n->fraction_str = fraction_to_string2(&(n2->fraction), p->precision + 1);
+	else
+		n->fraction_str = fraction_to_string(&(n2->fraction), p->precision + 1);
+	if (!(n2->fraction_str))
 		return (NULL);
-	if (ft_strequ(n->integer_str, "0") && ft_strnequ(n->fraction_str, "0000", 4))
+	if (ft_strequ(n2->integer_str, "0") && ft_strnequ(n2->fraction_str, "0000", 4))
+	{
+		free_exact_float(n2);
 		return (format_e(n, p));
-	return (format_f(n, p));
+	}
+	free_exact_float(n2);
+	return (format_f(n, p));*/
+	return (NULL);
 }

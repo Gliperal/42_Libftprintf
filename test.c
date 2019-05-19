@@ -712,6 +712,30 @@ void more_floats()
 	long double longnan1 = make_longdouble(0x0000000000007fff, 0x0000000000000001);
 	ft_printf("%LE\n", longnan1);
 	printf("%LE\n", longnan1);
+/*
+	ft_printf("%g\n", 424242.0);
+	printf("%g\n", 424242.0);
+	ft_printf("%g\n", 4424242.0);
+	printf("%g\n", 4424242.0);
+	ft_printf("%g\n", 0.0);
+	printf("%g\n", 0.0);
+	ft_printf("%g\n", 0.00042);
+	printf("%g\n", 0.00042);
+	ft_printf("%g\n", 0.000042);
+	printf("%g\n", 0.000042);
+	ft_printf("%g\n", double_max);
+	printf("%g\n", double_max);
+	ft_printf("%Lg\n", denormal_min);
+	printf("%Lg\n", denormal_min);
+	ft_printf("%Lg\n", negative_longzero);
+	printf("%Lg\n", negative_longzero);
+	ft_printf("%Lg\n", neg_long_inf);
+	printf("%Lg\n", neg_long_inf);
+	ft_printf("%.0g\n", 42.0);
+	printf("%.0g\n", 42.0);
+	ft_printf("%.0g\n", 4.0);
+	printf("%.0g\n", 4.0);
+	*/
 }
 
 
