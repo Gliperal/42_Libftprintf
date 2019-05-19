@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:07:16 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:26:27 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*value_to_hex(char *ptr, int size, int uppercase)
 	return (hex);
 }
 
-static void	format_hex_str(t_printable *p, char **hex, int uppercase)
+static int	format_hex_str(t_printable *p, char **hex, int uppercase)
 {
 	char	*tmp;
 	char	*prefix;
@@ -71,10 +71,7 @@ static void	format_hex_str(t_printable *p, char **hex, int uppercase)
 	{
 		p->flags &= ~ZEROPAD;
 		if (!pad_left(hex, p->precision))
-		{
-			*hex = NULL;
-			return ;
-		}
+			return (0);
 	}
 	if (p->flags & ALTFORM)
 		prefix = uppercase ? "0X" : "0x";
@@ -90,9 +87,10 @@ static void	format_hex_str(t_printable *p, char **hex, int uppercase)
 	tmp = *hex;
 	*hex = pad_printable(p, prefix, *hex);
 	free(tmp);
+	return (1);
 }
 
-char	*format_hexadecimal(t_printable *p)
+char		*format_hexadecimal(t_printable *p)
 {
 	char	*mem;
 	int		size;
@@ -103,6 +101,8 @@ char	*format_hexadecimal(t_printable *p)
 	size = byte_size(size_of_type(p->type, p->modifier));
 	uppercase = (p->type == 'X');
 	hex = value_to_hex(mem, size, uppercase);
-	format_hex_str(p, &hex, uppercase);
-	return (hex);
+	if (format_hex_str(p, &hex, uppercase))
+		return (hex);
+	else
+		return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 13:58:44 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:24:39 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static long long	extract_data(t_printable *p)
 		return (*((int *)p->data));
 }
 
-char	*format_decimal(t_printable *p)
+char				*format_decimal(t_printable *p)
 {
 	long long	n;
 	char		*str;

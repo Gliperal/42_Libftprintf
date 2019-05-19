@@ -6,20 +6,20 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 12:45:03 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:31:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-#include <stdlib.h>
-#include <stdarg.h>
-#include "libft.h"
-#include "argsize.h"
-#include "readers.h"
-#include "sizers.h"
-#include "exact_float.h"
+# include <stdlib.h>
+# include <stdarg.h>
+# include "libft.h"
+# include "argsize.h"
+# include "readers.h"
+# include "sizers.h"
+# include "exact_float.h"
 
 # define MOD_H 1
 # define MOD_HH 2
@@ -64,18 +64,18 @@ typedef struct	s_printable
 	void		*data;
 }				t_printable;
 
-t_list *new_printable(void);
-t_list	*read_format_string(const char *format);
-int	read_placeholder(const char **format, t_list *printables);
-void put_printable(t_list *printable);
-void free_printables(t_list **printables);
+t_list			*new_printable(void);
+t_list			*read_format_string(const char *format);
+int				read_placeholder(const char **format, t_list *printables);
+void			put_printable(t_list *printable);
+void			free_printables(t_list **printables);
 
-t_arglist	*new_arglist(void);
-int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type);
-void		free_arglist(t_arglist **arglist);
-t_arglist	*build_arglist(t_list *printables, int positional);
-int			withdraw_args(t_arglist *arglist, va_list ap);
-void		inject_args(t_list *printables, t_arglist *arglist, int positional);
+t_arglist		*new_arglist(void);
+int				set_arg_type(t_arglist *arglist, int index, ARGSIZE type);
+void			free_arglist(t_arglist **arglist);
+t_arglist		*build_arglist(t_list *printables, int positional);
+int				withdraw_args(t_arglist *arglist, va_list ap);
+void			inject_args(t_list *printables, t_arglist *arglist, int pstnl);
 
 typedef void	*(*t_reader)(va_list);
 typedef ARGSIZE	(*t_sizer)(char modifier);
@@ -107,22 +107,22 @@ static const t_type_reader g_type_readers[] =
 	(t_type_reader) {0, 0}
 };
 
-char	*format_char(t_printable *p);
-char	*format_str(t_printable *p);
-char	*format_percent(t_printable *p);
-char	*format_hexadecimal(t_printable *p);
-char	*format_pointer(t_printable *p);
-char	*format_octal(t_printable *p);
-char	*format_unsigned_decimal(t_printable *p);
-char	*format_decimal(t_printable *p);
-char	*format_double(t_printable *p);
+char			*format_char(t_printable *p);
+char			*format_str(t_printable *p);
+char			*format_percent(t_printable *p);
+char			*format_hexadecimal(t_printable *p);
+char			*format_pointer(t_printable *p);
+char			*format_octal(t_printable *p);
+char			*format_unsigned_decimal(t_printable *p);
+char			*format_decimal(t_printable *p);
+char			*format_double(t_printable *p);
 
-char	*format_e(t_exact_float *n, t_printable *p);
-char	*format_f(t_exact_float *n, t_printable *p);
-char	*format_g(t_exact_float *n, t_printable *p);
-char	*format_special(t_exact_float *n, char flags);
+char			*format_e(t_exact_float *n, t_printable *p);
+char			*format_f(t_exact_float *n, t_printable *p);
+char			*format_g(t_exact_float *n, t_printable *p);
+char			*format_special(t_exact_float *n, char flags);
 
-static const t_type_formatter g_type_formatters[] =
+static const t_type_formatter	g_type_formatters[] =
 {
 	(t_type_formatter) {'c', &size_char, &format_char},
 //	(t_type_formatter) {'C', 0, 0},
@@ -146,16 +146,16 @@ static const t_type_formatter g_type_formatters[] =
 	(t_type_formatter) {0, 0, 0}
 };
 
-ARGSIZE		size_of_type(char type, char modifier);
-t_reader	reader_for_size(ARGSIZE size);
-t_reader	reader_for_type(char type, char modifier);
-t_formatter	formatter_for_type(char type);
-char		*num_prefix(char flags, int negative);
-int			pad_left(char **str, size_t width);
-char		*pad_printable(t_printable *p, const char *prefix, const char *str);
-char		*pad_number(t_printable *p, const char *sign, const char *str);
+ARGSIZE			size_of_type(char type, char modifier);
+t_reader		reader_for_size(ARGSIZE size);
+t_reader		reader_for_type(char type, char modifier);
+t_formatter		formatter_for_type(char type);
+char			*num_prefix(char flags, int negative);
+int				pad_left(char **str, size_t width);
+char			*pad_printable(t_printable *p, const char *r, const char *str);
+char			*pad_number(t_printable *p, const char *sign, const char *str);
 
-int	ft_printf(const char *format, ...);
+int				ft_printf(const char *format, ...);
 
 // TODO Remove
 #include <unistd.h>
