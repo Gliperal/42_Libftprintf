@@ -256,10 +256,10 @@ void floats()
 	long double denormal_min = make_longdouble(0x0000000000008000, 0x0000000000000001);
 	ft_printf("%.17000LF\n", denormal_min);
 	printf("%.17000LF\n", denormal_min);
-	long double positive_longzero = make_longdouble(0x0000000000000000, 0x0000000000000001);
+	long double positive_longzero = make_longdouble(0x0000000000000000, 0x0000000000000000);
 	ft_printf("%Lf\n", positive_longzero);
 	printf("%Lf\n", positive_longzero);
-	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000000);
 	ft_printf("%LF\n", negative_longzero);
 	printf("%LF\n", negative_longzero);
 
@@ -300,8 +300,8 @@ void floats()
 	printf("%F\n", .42);
 	ft_printf("%f\n", 41.9999999);
 	printf("%f\n", 41.9999999);
-	ft_printf("%.F\n", 19.99);
-	printf("%.F\n", 19.99);
+	ft_printf("%.F\n", 99.99);
+	printf("%.F\n", 99.99);
 	ft_printf("%.1f\n", 0.05);
 	printf("%.1f\n", 0.05);
 	// Precision rounding tests when many digits into the fraction part 9(9) 8(9) 0(5)
@@ -683,6 +683,10 @@ void more_floats()
 	printf("%e\n", 42.0);
 	ft_printf("%E\n", .42);
 	printf("%E\n", .42);
+	ft_printf("%.46e\n", .17);
+	printf("%.46e\n", .17);
+	ft_printf("%.42e\n", .18);
+	printf("%.42e\n", .18);
 
 	double double_max = make_double(0x7fefffffffffffff);
 	ft_printf("%E\n", double_max);
@@ -703,7 +707,7 @@ void more_floats()
 	long double denormal_min = make_longdouble(0x0000000000008000, 0x0000000000000001);
 	ft_printf("%Le\n", denormal_min);
 	printf("%Le\n", denormal_min);
-	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000001);
+	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000000);
 	ft_printf("%Le\n", negative_longzero);
 	printf("%Le\n", negative_longzero);
 	long double neg_long_inf = make_longdouble(0x000000000000ffff, 0x8000000000000000);
@@ -712,6 +716,9 @@ void more_floats()
 	long double longnan1 = make_longdouble(0x0000000000007fff, 0x0000000000000001);
 	ft_printf("%LE\n", longnan1);
 	printf("%LE\n", longnan1);
+
+	ft_printf("%.e\n", 99.99);
+	printf("%.e\n", 99.99);
 /*
 	ft_printf("%g\n", 424242.0);
 	printf("%g\n", 424242.0);
@@ -771,7 +778,7 @@ static const t_group g_test_groups[] =
 
 int main()
 {
-	int tests[] = {23, -1};
+	int tests[] = {8, 17, 23, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

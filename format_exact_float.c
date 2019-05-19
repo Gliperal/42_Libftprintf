@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 18:56:58 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/18 20:37:15 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,35 @@ char	*format_e_zero(t_exact_float *n, t_printable *p)
 	return (result);
 }
 
+int	round_up_check(char **str)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while ((*str)[i] && (*str)[i] <= '9')
+		i++;
+	if ((*str)[i] <= '9')
+		return (0);
+	while (i >= 0)
+	{
+		if ((*str)[i] >= '9')
+			(*str)[i] = '0';
+		else if ((*str)[i] != '.')
+		{
+			(*str)[i] = (*str)[i] + 1;
+			return (0);
+		}
+		i--;
+	}
+	tmp = *str;
+	*str = ft_strnew(ft_strlen(*str) + 1);
+	(*str)[0] = '1';
+	ft_strcpy((*str) + 1, tmp);
+	free(tmp);
+	return (1);
+}
+
 char	*format_e(t_exact_float *n, t_printable *p)
 {
 	char *result;
@@ -137,8 +166,16 @@ char	*format_e(t_exact_float *n, t_printable *p)
 	str = ft_strsum(n->integer_str, n->fraction_str);
 	if (!str)
 		return (NULL);
-	tmp = str;
 	exp = ft_strlen(n->integer_str) - 1;
+	/* for round up */
+	tmp = fraction_to_string(&(n->fraction), 1);
+	if (*tmp >= '4')
+	{
+		str[ft_strlen(str) - 1]++;
+		free(tmp);
+	}
+	exp += round_up_check(&str);
+	tmp = str;
 	while (*tmp == '0')
 	{
 		tmp++;
@@ -178,6 +215,14 @@ char	*format_f(t_exact_float *n, t_printable *p)
 		n->fraction_str = fraction_to_string(&(n->fraction), p->precision);
 	if (!(n->fraction_str))
 		return (NULL);
+	/* for round up */
+	if (p->precision == 0)
+	{
+		tmp = fraction_to_string(&(n->fraction), 1);
+		if (*tmp >= '4')
+			n->integer_str[ft_strlen(n->integer_str) - 1]++;
+		free(tmp);
+	}
 	if (p->precision || (p->flags & ALTFORM))
 	{
 		str = ft_strsum(n->integer_str, ".");
@@ -189,6 +234,7 @@ char	*format_f(t_exact_float *n, t_printable *p)
 		tmp = ft_strdup(n->integer_str);
 	}
 	free(str);
+	round_up_check(&tmp);
 	format_padding(&tmp, n, p);
 	return (tmp);
 }
