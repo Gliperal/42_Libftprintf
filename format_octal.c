@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 19:11:55 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 14:13:20 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:26:40 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*format_octal(t_printable *p)
 	str = ft_itoa_base_u(n, "01234567");
 	if (!str)
 		return (NULL);
-	if (p->flags & ALTFORM)
+	if (p->flags & ALTFORM && n)
 	{
 		ostr = ft_strsum("0", str);
 		free(str);

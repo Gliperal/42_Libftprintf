@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 14:13:05 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:46:10 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*format_decimal(t_printable *p)
 		if (!pad_left(&str, p->precision))
 			return (NULL);
 	}
-	tmp = pad_printable(p, num_prefix(p->flags, n < 0), str);
+	tmp = pad_number(p, num_prefix(p->flags, n < 0), str);
 	free(str);
 	return (tmp);
 }

@@ -17,6 +17,14 @@ void basic()
 
 void character()
 {
+	ft_printf("%c\n", 'A');
+	printf("%c\n", 'A');
+	ft_printf("%c\n", 'z');
+	printf("%c\n", 'z');
+	ft_printf("%c\n", '!');
+	printf("%c\n", '!');
+	ft_printf("%c%c%c%c%c%c", ' ', '4', '\13', '~', '2', '\n');
+	printf("%c%c%c%c%c%c", ' ', '4', '\13', '~', '2', '\n');
 }
 
 
@@ -24,7 +32,15 @@ void character()
 
 void string()
 {
-	// strings with a null terminator in the middle (use precision)
+	char *str = "Hello world.";
+	ft_printf("%s\n", str);
+	printf("%s\n", str);
+	char *str2 = "Hello world.\0Goodbye world.";
+	ft_printf("%.27s\n", str2);
+	printf("%.27s\n", str2);
+	char *empty = "";
+	ft_printf("Empty str%sing\n", empty);
+	printf("Empty str%sing\n", empty);
 }
 
 
@@ -32,8 +48,16 @@ void string()
 
 void pointer()
 {
-	// null pointer
-	// test p in both the malloc block and the stack
+	void *null = NULL;
+	ft_printf("%p\n", null);
+	printf("%p\n", null);
+	void *stack = "";
+	void *heap = malloc(1);
+	ft_printf("%p\n", stack);
+	printf("%p\n", stack);
+	ft_printf("%p\n", heap);
+	printf("%p\n", heap);
+	free(heap);
 }
 
 
@@ -262,7 +286,10 @@ void floats()
 	long double negative_longzero = make_longdouble(0x0000000000008000, 0x0000000000000000);
 	ft_printf("%LF\n", negative_longzero);
 	printf("%LF\n", negative_longzero);
-
+}
+	
+void floats_part2()
+{
 	long double pos_pseudo_inf = make_longdouble(0x0000000000007fff, 0x0000000000000000);
 	ft_printf("%LF\n", pos_pseudo_inf);
 	printf("%LF\n", pos_pseudo_inf);
@@ -295,7 +322,6 @@ void floats()
 	ft_printf("%LF\n", longnan6);
 	printf("%LF\n", longnan6);
 
-	// Precision rounding tests: 2.9(9), 9.8(9), 0.0(5), etc.
 	ft_printf("%F\n", .42);
 	printf("%F\n", .42);
 	ft_printf("%f\n", 41.9999999);
@@ -304,8 +330,6 @@ void floats()
 	printf("%.F\n", 99.99);
 	ft_printf("%.1f\n", 0.05);
 	printf("%.1f\n", 0.05);
-	// Precision rounding tests when many digits into the fraction part 9(9) 8(9) 0(5)
-	// %e and %g tests (probably in their own functions)
 }
 
 
@@ -314,22 +338,38 @@ void floats()
 void format_string()
 {
 	ft_printf("[%d]\n", 42);
+	printf("[%d]\n", 42);
 	ft_printf("[%+d]\n", 42);
+	printf("[%+d]\n", 42);
 	ft_printf("[%10d]\n", 42);
+	printf("[%10d]\n", 42);
 	ft_printf("[%-10d]\n", 42);
+	printf("[%-10d]\n", 42);
 	ft_printf("[%.10d]\n", 42);
+	printf("[%.10d]\n", 42);
 	ft_printf("[% .10d]\n", 42);
+	printf("[% .10d]\n", 42);
 	ft_printf("[%10.4d]\n", 42);
+	printf("[%10.4d]\n", 42);
 	ft_printf("[%-10.4d]\n", 42);
+	printf("[%-10.4d]\n", 42);
 
 	ft_printf("[%ld]\n", 4242424242);
+	printf("[%ld]\n", 4242424242);
 	ft_printf("[% ld]\n", 4242424242);
-	ft_printf("[%9ld]\n", 4242424242);
-	ft_printf("[%010ld]\n", 4242424242);
-	ft_printf("[%.9ld]\n", 4242424242);
-	ft_printf("[%-.10ld]\n", 4242424242);
-	ft_printf("[%10.4ld]\n", 4242424242);
+	printf("[% ld]\n", 4242424242);
+	ft_printf("[%19ld]\n", 4242424242);
+	printf("[%19ld]\n", 4242424242);
+	ft_printf("[%020ld]\n", 4242424242);
+	printf("[%020ld]\n", 4242424242);
+	ft_printf("[%.19ld]\n", 4242424242);
+	printf("[%.19ld]\n", 4242424242);
+	ft_printf("[%-.20ld]\n", 4242424242);
+	printf("[%-.20ld]\n", 4242424242);
+	ft_printf("[%20.4ld]\n", 4242424242);
+	printf("[%20.4ld]\n", 4242424242);
 	ft_printf("[%+20.10ld]\n", 4242424242);
+	printf("[%+20.10ld]\n", 4242424242);
 
 	// Throw some special characters in the string that aren't part of a format argument
 	// plus at the end of a number
@@ -341,6 +381,10 @@ void format_string()
 
 void char_f()
 {
+	ft_printf("[%10c]\n", 'c');
+	printf("[%10c]\n", 'c');
+	ft_printf("[%-10c]\n", 'c');
+	printf("[%-10c]\n", 'c');
 }
 
 
@@ -348,6 +392,11 @@ void char_f()
 
 void string_f()
 {
+	char *str = "abc def ghi jkl mno pqr stu";
+	ft_printf("[%10.11s]\n", str);
+	printf("[%10.11s]\n", str);
+	ft_printf("[%-10.7s]\n", str);
+	printf("[%-10.7s]\n", str);
 }
 
 
@@ -358,6 +407,10 @@ void pointer_f()
 	char *ptr = "";
 	ft_printf("[%20p]\n", ptr);
 	printf("[%20p]\n", ptr);
+/*	ft_printf("[%# -10p]\n", ptr);
+	printf("[%# -10p]\n", ptr);
+	ft_printf("[%0+5.5p]\n", ptr);
+	printf("[%0+5.5p]\n", ptr);*/
 }
 
 
@@ -365,14 +418,12 @@ void pointer_f()
 
 void decimal_f()
 {
-	ft_printf("#%d\n", 42);
-	printf("#%d\n", 42);
-	ft_printf("+%d\n", 42);
-	printf("+%d\n", 42);
-	ft_printf("+%d\n", -42);
-	printf("+%d\n", -42);
-	ft_printf("+%d\n", 0);
-	printf("+%d\n", 0);
+	ft_printf("%+d\n", 42);
+	printf("%+d\n", 42);
+	ft_printf("%+d\n", -42);
+	printf("%+d\n", -42);
+	ft_printf("%+d\n", 0);
+	printf("%+d\n", 0);
 	ft_printf(" %d\n", 42);
 	printf(" %d\n", 42);
 	ft_printf("% d\n", -42);
@@ -469,12 +520,26 @@ void flags()
 {
 	// Flags overriding flags
 	ft_printf("[%#-+'#-+'10.2f]\n", (double) 4242);
+	printf("[%#-+'#-+'10.2f]\n", (double) 4242);
+	ft_printf("[%'+-#'+-#10.2f]\n", (double) 4242);
+	printf("[%'+-#'+-#10.2f]\n", (double) 4242);
 	ft_printf("[%.0f]\n", 42.1234567);
+	printf("[%.0f]\n", 42.1234567);
 	ft_printf("[%f]\n", 42.1234567);
-	// More than one of the same flag
+	printf("[%f]\n", 42.1234567);
+	ft_printf("[%.04f]\n", 42.1234567);
+	printf("[%.04f]\n", 42.1234567);
 	// negative arg field width overriding flags
-	// Are zeros allowed to start positional arguments or non-positional precision?
-	// field width / flags / precision on %
+	ft_printf("[%# %]\n");
+	printf("[%# %]\n");
+	ft_printf("[%+.10%]\n");
+	printf("[%+.10%]\n");
+	ft_printf("[%10%]\n");
+	printf("[%10%]\n");
+	ft_printf("[%-10%]\n");
+	printf("[%-10%]\n");
+	ft_printf("[%010%]\n");
+	printf("[%010%]\n");
 }
 
 
@@ -483,8 +548,8 @@ void flags()
 void flags2()
 {
 	/* the default printf doesn't seem to be able to use appostrophe correctly */
-	// ft_printf("%'d\n", 42424242);
-	// printf("%'d\n", 42424242);
+	ft_printf("%'d\n", 42424242);
+	printf("%'d\n", 42424242);
 }
 
 
@@ -511,8 +576,8 @@ void field_width()
 	printf("[%10x]\n", 66);
 	ft_printf("[%10X]\n", 66);
 	printf("[%10X]\n", 66);
-//	ft_printf("[%10f]\n", 42.42);
-//	printf("[%10f]\n", 42.42);
+	ft_printf("[%10f]\n", 42.42);
+	printf("[%10f]\n", 42.42);
 	ft_printf("[%10%]\n");
 	printf("[%10%]\n");
 
@@ -654,7 +719,14 @@ void precision()
 	ft_printf("%#.8X\n", 66);
 	printf("%#.8X\n", 66);
 
-	// default precision for floats = 6
+	ft_printf("%#.f\n", 42.0);
+	printf("%#.f\n", 42.0);
+	ft_printf("%#.1F\n", 42.0);
+	printf("%#.1F\n", 42.0);
+	ft_printf("%#.3f\n", 42.0);
+	printf("%#.3f\n", 42.0);
+	ft_printf("%#.8F\n", 42.0);
+	printf("%#.8F\n", 42.0);
 }
 
 
@@ -662,10 +734,19 @@ void precision()
 
 void aa()
 {
+	ft_printf("[%1$d,%2$d]\n", 4, 2);
 	printf("[%1$d,%2$d]\n", 4, 2);
+	ft_printf("[%2$d,%1$d]\n", 2, 4);
 	printf("[%2$d,%1$d]\n", 2, 4);
+	ft_printf("[%1$c,%1$c]\n", 'a');
 	printf("[%1$c,%1$c]\n", 'a');
-	// Accessed field width and precision
+	ft_printf("%1$.*2$s%3$.*4$f\n", "Hello world", 6, 42.42, 0);
+	printf("%1$.*2$s%3$.*4$f\n", "Hello world", 6, 42.42, 0);
+	ft_printf("[%1$*2$i,%3$*2$i]\n", 4, 10, 2);
+	printf("[%1$*2$i,%3$*2$i]\n", 4, 10, 2);
+	ft_printf("[%02$-*01$i,%03$-*01$i]\n", 10, 4, 2);
+	printf("[%02$-*01$i,%03$-*01$i]\n", 10, 4, 2);
+	// Are zeros allowed to start positional arguments?
 }
 
 
@@ -759,34 +840,36 @@ static const t_group g_test_groups[] =
 	/*  6 */	&unsigned_decimal,
 	/*  7 */	&hexadecimal,
 	/*  8 */	&floats,
-	/*  9 */	&format_string,
-	/* 10 */	&char_f,
-	/* 11 */	&string_f,
-	/* 12 */	&pointer_f,
-	/* 13 */	&decimal_f,
-	/* 14 */	&octal_f,
-	/* 15 */	&unsigned_f,
-	/* 16 */	&hexadecimal_f,
-	/* 17 */	&floats_f,
-	/* 18 */	&flags,
-	/* 19 */	&flags2,
-	/* 20 */	&field_width,
-	/* 21 */	&precision,
-	/* 22 */	&aa,
-	/* 23 */	&more_floats
+	/*  9 */	&floats_part2,
+	/* 10 */	&format_string,
+	/* 11 */	&char_f,
+	/* 12 */	&string_f,
+	/* 13 */	&pointer_f,
+	/* 14 */	&decimal_f,
+	/* 15 */	&octal_f,
+	/* 16 */	&unsigned_f,
+	/* 17 */	&hexadecimal_f,
+	/* 18 */	&floats_f,
+	/* 19 */	&flags,
+	/* 20 */	&flags2,
+	/* 21 */	&field_width,
+	/* 22 */	&precision,
+	/* 23 */	&aa,
+	/* 24 */	&more_floats
 };
 
 int main()
 {
-	int tests[] = {8, 17, 23, -1};
+	char b[1];
+	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{
 		int test_id = tests[i];
 		t_group test_group = g_test_groups[test_id];
 		(*test_group)();
+		printf("Waiting for input...\n");
+		read(0, b, 1);
+		printf("\n");
 	}
-
-	/* Leaks test */
-	while(1) {}
 }

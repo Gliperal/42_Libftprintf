@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 12:28:08 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:45:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,20 @@ char	*pad_printable(t_printable *p, const char *prefix, const char *str)
 	}
 	else
 		return (ft_strsum(prefix, str));
+}
+
+char	*pad_number(t_printable *p, const char *sign, const char *str)
+{
+	char *tmp;
+	char *result;
+
+	if (p->flags & ZEROPAD)
+		return (pad_printable(p, sign, str));
+	else
+	{
+		tmp = ft_strsum(sign, str);
+		result = pad_printable(p, "", tmp);
+		free(tmp);
+		return (result);
+	}
 }

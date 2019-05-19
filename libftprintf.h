@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 14:47:42 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:45:03 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,9 +150,10 @@ ARGSIZE		size_of_type(char type, char modifier);
 t_reader	reader_for_size(ARGSIZE size);
 t_reader	reader_for_type(char type, char modifier);
 t_formatter	formatter_for_type(char type);
-char		*pad_printable(t_printable *p, const char *prefix, const char *str);
 char		*num_prefix(char flags, int negative);
 int			pad_left(char **str, size_t width);
+char		*pad_printable(t_printable *p, const char *prefix, const char *str);
+char		*pad_number(t_printable *p, const char *sign, const char *str);
 
 int	ft_printf(const char *format, ...);
 

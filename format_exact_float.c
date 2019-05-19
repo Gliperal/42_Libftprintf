@@ -6,14 +6,14 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 20:37:15 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 12:51:21 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "exact_float.h"
 
-int		format_padding(char **str, t_exact_float *n, t_printable *p)
+static int		format_padding(char **str, t_exact_float *n, t_printable *p)
 {
 	char *tmp;
 
@@ -97,6 +97,7 @@ static void	format_e_exp(int exp, char *str)
 
 char	*format_e_zero(t_exact_float *n, t_printable *p)
 {
+	char *str;
 	char *result;
 
 	result = ft_strnew(p->precision + 7);
@@ -106,8 +107,9 @@ char	*format_e_zero(t_exact_float *n, t_printable *p)
 	result[1] = '.';
 	ft_memset(result + 2, '0', p->precision);
 	ft_memcpy(result + p->precision + 2, "e+00", 4);
-	format_padding(&result, n, p);
-	return (result);
+	str = pad_number(p, num_prefix(p->flags, n->sign == -1), result);
+	free(result);
+	return (str);
 }
 
 int	round_up_check(char **str)
@@ -170,10 +172,8 @@ char	*format_e(t_exact_float *n, t_printable *p)
 	/* for round up */
 	tmp = fraction_to_string(&(n->fraction), 1);
 	if (*tmp >= '4')
-	{
 		str[ft_strlen(str) - 1]++;
-		free(tmp);
-	}
+	free(tmp);
 	exp += round_up_check(&str);
 	tmp = str;
 	while (*tmp == '0')
@@ -196,8 +196,9 @@ char	*format_e(t_exact_float *n, t_printable *p)
 		format_e_exp(exp, result + p->precision + 2);
 	}
 	free(str);
-	format_padding(&result, n, p);
-	return (result);
+	str = pad_number(p, num_prefix(p->flags, n->sign == -1), result);
+	free(result);
+	return (str);
 }
 
 char	*format_f(t_exact_float *n, t_printable *p)
@@ -235,8 +236,9 @@ char	*format_f(t_exact_float *n, t_printable *p)
 	}
 	free(str);
 	round_up_check(&tmp);
-	format_padding(&tmp, n, p);
-	return (tmp);
+	str = pad_number(p, num_prefix(p->flags, n->sign == -1), tmp);
+	free(tmp);
+	return (str);
 }
 
 /*
