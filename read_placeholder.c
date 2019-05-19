@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/13 15:56:34 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 13:53:15 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ static int	pop_number(const char **format, BOOL arg_number)
 		*format = str + 1;
 	else
 		*format = str;
-	if (num > 2147483648)
-		return (0);
-	return (num);
+	return (num > 2147483648 ? 0 : num);
 }
 
 static int	pop_flags(const char **format)

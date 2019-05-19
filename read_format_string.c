@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 14:02:45 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 16:18:10 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 13:55:47 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_list		*read_format_string(const char *format)
 			status = read_text(str, printables);
 		if (status == -1)
 		{
-			// TODO ft_lstdel(&printables, );
+			free_printables(&printables);
 			return (NULL);
 		}
 	}

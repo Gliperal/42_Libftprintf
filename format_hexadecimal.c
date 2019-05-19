@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 14:39:24 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:07:16 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	hex_to_char(unsigned char c, int uppercase)
 		return (c - 10 + (uppercase ? 'A' : 'a'));
 }
 
-char	*value_to_hex(char *ptr, int size, int uppercase)
+static char	*value_to_hex(char *ptr, int size, int uppercase)
 {
 	int				i;
 	char			*hex;
@@ -62,24 +62,19 @@ char	*value_to_hex(char *ptr, int size, int uppercase)
 	return (hex);
 }
 
-char	*format_hexadecimal(t_printable *p)
+static void	format_hex_str(t_printable *p, char **hex, int uppercase)
 {
-	char	*mem;
-	int		size;
-	int		uppercase;
-	char	*hex;
 	char	*tmp;
 	char	*prefix;
 
-	mem = p->data;
-	size = byte_size(size_of_type(p->type, p->modifier));
-	uppercase = (p->type == 'X');
-	hex = value_to_hex(mem, size, uppercase);
 	if (p->precision != -1)
 	{
 		p->flags &= ~ZEROPAD;
-		if (!pad_left(&hex, p->precision))
-			return (NULL);
+		if (!pad_left(hex, p->precision))
+		{
+			*hex = NULL;
+			return ;
+		}
 	}
 	if (p->flags & ALTFORM)
 		prefix = uppercase ? "0X" : "0x";
@@ -87,13 +82,27 @@ char	*format_hexadecimal(t_printable *p)
 		prefix = "";
 	if (!(p->flags & ZEROPAD))
 	{
-		tmp = hex;
-		hex = ft_strsum(prefix, hex);
+		tmp = *hex;
+		*hex = ft_strsum(prefix, *hex);
 		prefix = "";
 		free(tmp);
 	}
-	tmp = hex;
-	hex = pad_printable(p, prefix, hex);
+	tmp = *hex;
+	*hex = pad_printable(p, prefix, *hex);
 	free(tmp);
+}
+
+char	*format_hexadecimal(t_printable *p)
+{
+	char	*mem;
+	int		size;
+	int		uppercase;
+	char	*hex;
+
+	mem = p->data;
+	size = byte_size(size_of_type(p->type, p->modifier));
+	uppercase = (p->type == 'X');
+	hex = value_to_hex(mem, size, uppercase);
+	format_hex_str(p, &hex, uppercase);
 	return (hex);
 }

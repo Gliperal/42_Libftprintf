@@ -287,7 +287,7 @@ void floats()
 	ft_printf("%LF\n", negative_longzero);
 	printf("%LF\n", negative_longzero);
 }
-	
+
 void floats_part2()
 {
 	long double pos_pseudo_inf = make_longdouble(0x0000000000007fff, 0x0000000000000000);
@@ -430,6 +430,10 @@ void decimal_f()
 	printf("% d\n", -42);
 	ft_printf("% d\n", 0);
 	printf("% d\n", 0);
+	ft_printf("%hhd\n", (char) 42);
+	printf("%hhd\n", (char) 42);
+	ft_printf("%hd\n", (short) 42);
+	printf("%hd\n", (short) 42);
 }
 
 
@@ -467,12 +471,18 @@ void unsigned_f()
 
 void hexadecimal_f()
 {
-	ft_printf("[%#10x]\n", 42);
-	printf("[%#10x]\n", 42);
-	ft_printf("[%0#10x]\n", 42);
-	printf("[%0#10x]\n", 42);
-	ft_printf("[%0#10.6x]\n", 42);
-	printf("[%0#10.6x]\n", 42);
+	ft_printf("[%#10x]\n", 66);
+	printf("[%#10x]\n", 66);
+	ft_printf("[%0#10x]\n", 66);
+	printf("[%0#10x]\n", 66);
+	ft_printf("[%0#10.6x]\n", 66);
+	printf("[%0#10.6x]\n", 66);
+	ft_printf("[%hhx]\n", (char) 66);
+	printf("[%hhx]\n", (char) 66);
+	ft_printf("[%hx]\n", (short) 66);
+	printf("[%hx]\n", (short) 66);
+	ft_printf("[%lx]\n", 4242424242);
+	printf("[%lx]\n", 4242424242);
 }
 
 
@@ -507,6 +517,8 @@ void floats_f()
 	ft_printf("[%020f]\n", 42.42);
 	printf("[%020f]\n", 42.42);
 
+	ft_printf("%lf\n", 42.42);
+	printf("%lf\n", 42.42);
 	ft_printf("%Lf\n", (long double) 42.42);
 	printf("%Lf\n", (long double) 42.42);
 
@@ -740,13 +752,22 @@ void aa()
 	printf("[%2$d,%1$d]\n", 2, 4);
 	ft_printf("[%1$c,%1$c]\n", 'a');
 	printf("[%1$c,%1$c]\n", 'a');
+
+	ft_printf("%.*s%.*f.\n", 6, "Hello world", 0, 42.42);
+	printf("%.*s%.*f.\n", 6, "Hello world", 0, 42.42);
+	ft_printf("%*.*s%*.*f.\n", 10, 4, "Hello world", -10, 4, 42.42);
+	printf("%*.*s%*.*f.\n", 10, 4, "Hello world", -10, 4, 42.42);
+	ft_printf("%*.*s%*.*f.\n", -15, -6, "Hello world", 15, -4, 42.42);
+	printf("%*.*s%*.*f.\n", -15, -6, "Hello world", 15, -4, 42.42);
+	ft_printf("%1$0*2$d.\n", 42, -10);
+	printf("%1$0*2$d.\n", 42, -10);
+
 	ft_printf("%1$.*2$s%3$.*4$f\n", "Hello world", 6, 42.42, 0);
 	printf("%1$.*2$s%3$.*4$f\n", "Hello world", 6, 42.42, 0);
 	ft_printf("[%1$*2$i,%3$*2$i]\n", 4, 10, 2);
 	printf("[%1$*2$i,%3$*2$i]\n", 4, 10, 2);
 	ft_printf("[%02$-*01$i,%03$-*01$i]\n", 10, 4, 2);
 	printf("[%02$-*01$i,%03$-*01$i]\n", 10, 4, 2);
-	// Are zeros allowed to start positional arguments?
 }
 
 
@@ -827,6 +848,24 @@ void more_floats()
 }
 
 
+/* Return value tests */
+
+void return_value()
+{
+	int d, ft_d;
+
+	char *str = "42";
+	ft_d = ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	d = printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	printf("%d\n", ft_d);
+	printf("%d\n", d);
+	ft_d = ft_printf("|%9c|%9s|%9p|%9d|%9i|%9o|%9u|%9x|%9X|%9f|%9%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	d = printf("|%9c|%9s|%9p|%9d|%9i|%9o|%9u|%9x|%9X|%9f|%9%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	printf("%d\n", ft_d);
+	printf("%d\n", d);
+}
+
+
 typedef void	(*t_group)(void);
 
 static const t_group g_test_groups[] =
@@ -855,13 +894,14 @@ static const t_group g_test_groups[] =
 	/* 21 */	&field_width,
 	/* 22 */	&precision,
 	/* 23 */	&aa,
-	/* 24 */	&more_floats
+	/* 24 */	&more_floats,
+	/* 25 */	&return_value
 };
 
 int main()
 {
 	char b[1];
-	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, -1};
+	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 12:45:43 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:20:54 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,12 @@ char	*num_prefix(char flags, int negative)
 
 char	*pad_printable(t_printable *p, const char *prefix, const char *str)
 {
-	int		desired_width;
 	char	*result;
+	int		pad_location;
 
 	if (!p || !prefix || !str)
 		return (NULL);
-	desired_width = ft_strlen(prefix) + ft_strlen(str);
-	if (p->field_width > desired_width)
+	if (p->field_width > (int) (ft_strlen(prefix) + ft_strlen(str)))
 	{
 		result = ft_strnew(p->field_width + 1);
 		if (!result)
@@ -65,9 +64,10 @@ char	*pad_printable(t_printable *p, const char *prefix, const char *str)
 		result[p->field_width] = 0;
 		ft_memcpy(result, prefix, ft_strlen(prefix));
 		if (p->flags & RIGHTPAD)
-			ft_memcpy(result + ft_strlen(prefix), str, ft_strlen(str));
+			pad_location = ft_strlen(prefix);
 		else
-			ft_memcpy(result + p->field_width - ft_strlen(str), str, ft_strlen(str));
+			pad_location = p->field_width - ft_strlen(str);
+		ft_memcpy(result + pad_location, str, ft_strlen(str));
 		return (result);
 	}
 	else

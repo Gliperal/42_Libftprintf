@@ -6,28 +6,33 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 19:11:55 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 12:26:40 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:10:18 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*format_octal(t_printable *p)
+static unsigned long long	extract_data(t_printable *p)
 {
-	char *str;
-	char *ostr;
-	unsigned long long n;
-
 	if (p->modifier == MOD_HH)
-		n = *((unsigned char *)p->data);
+		return (*((unsigned char *)p->data));
 	else if (p->modifier == MOD_H)
-		n = *((unsigned short *)p->data);
+		return (*((unsigned short *)p->data));
 	else if (p->modifier == MOD_L)
-		n = *((unsigned long *)p->data);
+		return (*((unsigned long *)p->data));
 	else if (p->modifier == MOD_LL)
-		n = *((unsigned long long *)p->data);
+		return (*((unsigned long long *)p->data));
 	else
-		n = *((unsigned int *)p->data);
+		return (*((unsigned int *)p->data));
+}
+
+char						*format_octal(t_printable *p)
+{
+	unsigned long long	n;
+	char				*str;
+	char				*ostr;
+
+	n = extract_data(p);
 	str = ft_itoa_base_u(n, "01234567");
 	if (!str)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 19:56:44 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/10 12:30:10 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 13:52:10 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ static int	expand_arglist(t_arglist *arglist, int new_size)
 	return (1);
 }
 
-// Potential memory leak on 0 return if arglist is not freed
+/*
+** Potential memory leak on 0 return if arglist is not freed
+*/
+
 int			set_arg_type(t_arglist *arglist, int index, ARGSIZE type)
 {
 	t_argument *arg;

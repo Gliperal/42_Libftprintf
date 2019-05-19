@@ -6,28 +6,33 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 12:46:10 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 13:58:44 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
+static long long	extract_data(t_printable *p)
+{
+	if (p->modifier == MOD_HH)
+		return (*((char *)p->data));
+	else if (p->modifier == MOD_H)
+		return (*((short *)p->data));
+	else if (p->modifier == MOD_L)
+		return (*((long *)p->data));
+	else if (p->modifier == MOD_LL)
+		return (*((long long *)p->data));
+	else
+		return (*((int *)p->data));
+}
+
 char	*format_decimal(t_printable *p)
 {
-	char *str;
-	char *tmp;
-	long long n;
+	long long	n;
+	char		*str;
+	char		*tmp;
 
-	if (p->modifier == MOD_HH)
-		n = *((char *)p->data);
-	else if (p->modifier == MOD_H)
-		n = *((short *)p->data);
-	else if (p->modifier == MOD_L)
-		n = *((long *)p->data);
-	else if (p->modifier == MOD_LL)
-		n = *((long long *)p->data);
-	else
-		n = *((int *)p->data);
+	n = extract_data(p);
 	str = ft_itoa_base_u(ft_abs(n), "0123456789");
 	if (!str)
 		return (NULL);
