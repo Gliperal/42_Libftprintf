@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:58:53 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:12:14 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ char			*format_unsigned_decimal(t_printable *p);
 char			*format_decimal(t_printable *p);
 char			*format_double(t_printable *p);
 
+int				is_zero(t_exact_float *n);
+int				round_up_check(char **str);
 char			*format_e(t_exact_float *n, t_printable *p);
 char			*format_f(t_exact_float *n, t_printable *p);
 char			*format_special(t_exact_float *n, char flags);

@@ -8,7 +8,8 @@ CSRC=ft_printf.c \
 	 readers1.c readers2.c sizers.c dispatchers.c \
 	 format_char.c format_str.c format_percent.c \
 	 format_hexadecimal.c format_pointer.c format_octal.c format_unsigned_decimal.c format_decimal.c \
-	 format_double.c float.c format_exact_float.c exact_float.c exact_float_integer.c exact_float_fraction.c \
+	 float.c exact_float.c exact_float_integer.c exact_float_fraction.c \
+	 format_double.c format_exact_float.c format_e_exact_float.c \
 	 pad_printable.c
 OBJS=ft_printf.o \
 	 positional_args.o \
@@ -18,7 +19,8 @@ OBJS=ft_printf.o \
 	 readers1.o readers2.o sizers.o dispatchers.o \
 	 format_char.o format_str.o format_percent.o \
 	 format_hexadecimal.o format_pointer.o format_octal.o format_unsigned_decimal.o format_decimal.o \
-	 format_double.o float.o format_exact_float.o exact_float.o exact_float_integer.o exact_float_fraction.o \
+	 float.o exact_float.o exact_float_integer.o exact_float_fraction.o \
+	 format_double.o format_exact_float.o format_e_exact_float.o \
 	 pad_printable.o
 GCH=libftprintf.gch
 AR=ar rcs
