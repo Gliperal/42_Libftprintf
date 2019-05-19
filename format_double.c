@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:52:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 14:48:07 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:59:11 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ char	*format_double(t_printable *p)
 			str = format_e(f, p);
 		else if (p->type == 'f' || p->type == 'F')
 			str = format_f(f, p);
-		else if (p->type == 'g' || p->type == 'G')
-			str = format_g(f, p);
 	}
 	if (!str)
 		return (NULL);

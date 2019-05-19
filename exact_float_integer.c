@@ -6,36 +6,12 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 15:37:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/17 14:19:41 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:00:32 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exact_float.h"
 #include "libft.h"
-
-t_big_integer		*new_integer(unsigned int *value, int size_in_ints)
-{
-	t_big_integer	*n;
-	int				i;
-
-	n = (t_big_integer *)malloc(sizeof(t_big_integer));
-	if (!n)
-		return (NULL);
-	n->value = malloc(size_in_ints * sizeof(int));
-	if (!(n->value))
-	{
-		free(n);
-		return (NULL);
-	}
-	n->size = size_in_ints;
-	i = 0;
-	while (i < size_in_ints)
-	{
-		n->value[i] = value[size_in_ints - 1 - i];
-		i++;
-	}
-	return (n);
-}
 
 static int			is_zero(t_big_integer *n)
 {

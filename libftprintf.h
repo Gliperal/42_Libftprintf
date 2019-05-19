@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:38:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:58:53 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ char			*format_double(t_printable *p);
 
 char			*format_e(t_exact_float *n, t_printable *p);
 char			*format_f(t_exact_float *n, t_printable *p);
-char			*format_g(t_exact_float *n, t_printable *p);
 char			*format_special(t_exact_float *n, char flags);
 
 static const t_type_formatter	g_type_formatters[] =
@@ -133,8 +132,6 @@ static const t_type_formatter	g_type_formatters[] =
 	(t_type_formatter) {'E', &size_double, &format_double},
 	(t_type_formatter) {'f', &size_double, &format_double},
 	(t_type_formatter) {'F', &size_double, &format_double},
-	(t_type_formatter) {'g', &size_double, &format_double},
-	(t_type_formatter) {'G', &size_double, &format_double},
 	(t_type_formatter) {'i', &size_int, &format_decimal},
 	(t_type_formatter) {'o', &size_int, &format_octal},
 	(t_type_formatter) {'p', &size_ptr, &format_pointer},

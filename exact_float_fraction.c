@@ -6,36 +6,12 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:42:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/18 19:59:56 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:00:44 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exact_float.h"
 #include "libft.h"
-
-t_big_fraction		*new_fraction(unsigned int *value, int size_in_ints)
-{
-	t_big_fraction	*n;
-	int				i;
-
-	n = (t_big_fraction *)malloc(sizeof(t_big_fraction));
-	if (!n)
-		return (NULL);
-	n->value = malloc(size_in_ints * sizeof(int));
-	if (!(n->value))
-	{
-		free(n);
-		return (NULL);
-	}
-	n->size = size_in_ints;
-	i = 0;
-	while (i < size_in_ints)
-	{
-		n->value[i] = value[i];
-		i++;
-	}
-	return (n);
-}
 
 static int			is_zero(t_big_fraction *n)
 {
@@ -91,7 +67,6 @@ char				*fraction_to_string(t_big_fraction *n, int precision)
 		str[i] = '0' + multiply(n, 10);
 		i++;
 	}
-	// TODO fix the round up
 	if (multiply(n, 10) > 4)
 		str[i - 1] = str[i - 1] + 1;
 	return (str);
@@ -129,7 +104,6 @@ char				*fraction_to_string2(t_big_fraction *n, int precision)
 		str[leading_zeros + i] = '0' + multiply(n, 10);
 		i++;
 	}
-	// TODO fix the round up
 	if (multiply(n, 10) > 4)
 		str[leading_zeros + i - 1] = str[leading_zeros + i - 1] + 1;
 	return (str);
