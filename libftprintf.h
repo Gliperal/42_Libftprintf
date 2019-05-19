@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:31:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:38:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ t_list			*read_format_string(const char *format);
 int				read_placeholder(const char **format, t_list *printables);
 void			put_printable(t_list *printable);
 void			free_printables(t_list **printables);
+
+int				positional_args(t_list *printables);
 
 t_arglist		*new_arglist(void);
 int				set_arg_type(t_arglist *arglist, int index, ARGSIZE type);

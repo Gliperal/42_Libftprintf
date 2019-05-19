@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 13:50:11 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 14:43:23 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,6 @@
 #include "testing.h"
 
 // TODO put -Werror back in the makefile
-
-// TODO need to find a good place for this function
-static int	positional_args(t_list *printables)
-{
-	t_printable	*p;
-	int			arg_style;
-	int			tmp;
-
-	tmp = -1;
-	arg_style = -1;
-	while (printables)
-	{
-		p = (t_printable *)printables->content;
-		if (p != 0)
-		{
-			if (p->field_width_arg > 0 || p->precision_arg > 0
-					|| p->data_arg > 0)
-				tmp = 1;
-			if (p->field_width_arg == 0 || p->precision_arg == 0
-					|| p->data_arg == 0)
-				tmp = 0;
-		}
-		if (arg_style == -1)
-			arg_style = tmp;
-		else if (arg_style != tmp)
-			return (-1);
-		printables = printables->next;
-	}
-	return (arg_style);
-}
 
 int	write_printable(t_list *printable)
 {
@@ -79,7 +49,7 @@ int	write_printables(t_list *printables)
 	int chars_written;
 
 	chars_written = 0;
-	while(printables)
+	while (printables)
 	{
 		chars_written += write_printable(printables);
 		printables = printables->next;
@@ -87,37 +57,40 @@ int	write_printables(t_list *printables)
 	return (chars_written);
 }
 
-int	ft_printf(const char *format, ...)
+int	printf_main(const char *format, va_list ap)
 {
-	printf("\nft_printf %s\n", format);
-	t_list *printables = read_format_string(format);
+	t_list		*printables;
+	int			pa;
+	t_arglist	*arglist;
+	int			chars_written;
 
-	int pa = positional_args(printables);
+	printables = read_format_string(format);
+	pa = positional_args(printables);
 	if (pa == -1)
 		return (-1);
-	t_arglist *arglist = build_arglist(printables, pa);
+	arglist = build_arglist(printables, pa);
 	if (arglist == NULL)
 		return (-1);
-
-	va_list ap;
-	va_start(ap, format);
 	if (!withdraw_args(arglist, ap))
 	{
 		free_printables(&printables);
 		free_arglist(&arglist);
 		return (-1);
 	}
-
-//	put_arglist(arglist);
-
 	inject_args(printables, arglist, pa);
-//	ft_lstiter(printables, &put_printable);
-	int chars_written = write_printables(printables);
-
+	chars_written = write_printables(printables);
 	free_printables(&printables);
 	free_arglist(&arglist);
-
-	va_end(ap);
-
 	return (chars_written);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list		ap;
+	int			result;
+
+	va_start(ap, format);
+	result = printf_main(format, ap);
+	va_end(ap);
+	return (result);
 }
