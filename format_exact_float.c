@@ -6,14 +6,14 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 15:08:42 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:39:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include "exact_float.h"
 
-char	*format_special(t_exact_float *n, char flags)
+char		*format_special(t_exact_float *n, char flags)
 {
 	if (n->type == 'i')
 	{
@@ -27,7 +27,7 @@ char	*format_special(t_exact_float *n, char flags)
 	return (NULL);
 }
 
-int	is_zero(t_exact_float *n)
+int			is_zero(t_exact_float *n)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ int	is_zero(t_exact_float *n)
 	return (1);
 }
 
-int	round_up_check(char **str)
+int			round_up_check(char **str)
 {
 	char	*tmp;
 	int		i;
@@ -79,9 +79,8 @@ int	round_up_check(char **str)
 	return (1);
 }
 
-char	*format_f(t_exact_float *n, t_printable *p)
+static int	load_strings(t_exact_float *n, t_printable *p)
 {
-	char *str;
 	char *tmp;
 
 	if (p->precision == -1)
@@ -89,12 +88,11 @@ char	*format_f(t_exact_float *n, t_printable *p)
 	if (!(n->integer_str))
 		n->integer_str = integer_to_string(&(n->integer));
 	if (!(n->integer_str))
-		return (NULL);
+		return (0);
 	if (!(n->fraction_str))
 		n->fraction_str = fraction_to_string(&(n->fraction), p->precision);
 	if (!(n->fraction_str))
-		return (NULL);
-	/* for round up */
+		return (0);
 	if (p->precision == 0)
 	{
 		tmp = fraction_to_string(&(n->fraction), 1);
@@ -102,6 +100,16 @@ char	*format_f(t_exact_float *n, t_printable *p)
 			n->integer_str[ft_strlen(n->integer_str) - 1]++;
 		free(tmp);
 	}
+	return (1);
+}
+
+char		*format_f(t_exact_float *n, t_printable *p)
+{
+	char *str;
+	char *tmp;
+
+	if (!load_strings(n, p))
+		return (NULL);
 	if (p->precision || (p->flags & ALTFORM))
 	{
 		str = ft_strsum(n->integer_str, ".");

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 18:55:30 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:20:54 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:31:50 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*pad_printable(t_printable *p, const char *prefix, const char *str)
 
 	if (!p || !prefix || !str)
 		return (NULL);
-	if (p->field_width > (int) (ft_strlen(prefix) + ft_strlen(str)))
+	if (p->field_width > (int)(ft_strlen(prefix) + ft_strlen(str)))
 	{
 		result = ft_strnew(p->field_width + 1);
 		if (!result)

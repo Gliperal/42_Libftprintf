@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 17:42:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 15:00:44 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 15:27:33 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ char				*fraction_to_string(t_big_fraction *n, int precision)
 	return (str);
 }
 
+static void			helper(int precision, int *i, t_big_fraction *n, char *str)
+{
+	while (*i < precision)
+	{
+		str[*i] = '0' + multiply(n, 10);
+		(*i)++;
+	}
+}
+
 /*
 ** I would give this a more descriptive name if not for norm, but it basically
 ** ignores leading zeros when counting the precision.
@@ -99,11 +108,7 @@ char				*fraction_to_string2(t_big_fraction *n, int precision)
 	ft_memset(str, '0', leading_zeros + precision);
 	str[leading_zeros] = '0' + digit;
 	i = 1;
-	while (i < precision)
-	{
-		str[leading_zeros + i] = '0' + multiply(n, 10);
-		i++;
-	}
+	helper(precision, &i, n, str + leading_zeros);
 	if (multiply(n, 10) > 4)
 		str[leading_zeros + i - 1] = str[leading_zeros + i - 1] + 1;
 	return (str);
