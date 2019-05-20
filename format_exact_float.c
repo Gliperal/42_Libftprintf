@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 15:39:51 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 23:22:18 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 char		*format_special(t_exact_float *n, char flags)
 {
+	flags = 0;
 	if (n->type == 'i')
 	{
 		if (n->sign == 1)

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 20:48:33 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 16:24:56 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/19 21:21:28 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,20 @@ static char	*format_e_zero(t_exact_float *n, t_printable *p)
 	return (str);
 }
 
+/*
+** The first line in this function used to be
+**     if (!(n->integer_str))
+** but I had to change it to fit norme. It doesn't really matter since I'm no
+** longer handling G.
+*/
+
 static char	*load_strings(t_exact_float *n, t_printable *p)
 {
 	char	*str;
 	char	*tmp;
 	int		one_more;
 
-	if (!(n->integer_str))
-		n->integer_str = integer_to_string(&(n->integer));
+	n->integer_str = integer_to_string(&(n->integer));
 	if (!(n->integer_str))
 		return (NULL);
 	if (!(n->fraction_str))
@@ -109,9 +115,9 @@ static char	*do_things(t_exact_float *n, t_printable *p, char *tmp, int exp)
 
 char		*format_e(t_exact_float *n, t_printable *p)
 {
-	char *str;
-	char *tmp;
-	int exp;
+	char	*str;
+	char	*tmp;
+	int		exp;
 
 	if (p->precision == -1)
 		p->precision = 6;
