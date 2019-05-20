@@ -875,6 +875,24 @@ void return_value()
 }
 
 
+/* strPrintf tests */
+
+void strprintf()
+{
+	char *str = "42";
+	char *x = ft_strprintf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+	printf("%s", x);
+	free(x);
+	printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
+
+	double double_max = make_double(0x7fefffffffffffff);
+	x = ft_strprintf("%f\n", double_max);
+	printf("%s", x);
+	free(x);
+	printf("%f\n", double_max);
+}
+
+
 typedef void	(*t_group)(void);
 
 static const t_group g_test_groups[] =
@@ -905,13 +923,15 @@ static const t_group g_test_groups[] =
 	/* 23 */	&aa,
 	/* 24 */	&more_floats,
 	/* 25 */	&non_printable,
-	/* 26 */	&return_value
+	/* 26 */	&return_value,
+	/* 27 */	&strprintf
 };
 
 int main()
 {
 	char b[1];
-	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, -1};
+//	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 26, -1};
+	int tests[] = {23, 24, 25, 27, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{

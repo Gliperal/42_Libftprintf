@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 22:07:33 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 12:46:57 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ char			*pad_printable(t_printable *p, const char *r, const char *str);
 char			*pad_number(t_printable *p, const char *sign, const char *str);
 
 int				ft_printf(const char *format, ...);
+char			*ft_strprintf(const char *format, ...);
 
 // TODO Remove
 #include <unistd.h>

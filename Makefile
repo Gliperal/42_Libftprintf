@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -Wextra
-CSRC=ft_printf.c \
+CFLAGS=-Wall -Wextra -Werror
+CSRC=ft_printf.c ft_strprintf.c \
 	 positional_args.c \
 	 printable.c \
 	 arglist.c build_arglist.c inject_args.c \
@@ -12,7 +12,7 @@ CSRC=ft_printf.c \
 	 format_double.c format_exact_float.c format_e_exact_float.c \
 	 format_non_printable.c \
 	 pad_printable.c
-OBJS=ft_printf.o \
+OBJS=ft_printf.o ft_strprintf.o \
 	 positional_args.o \
 	 printable.o \
 	 arglist.o build_arglist.o inject_args.o \
