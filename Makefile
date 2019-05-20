@@ -11,7 +11,8 @@ CSRC=ft_printf.c ft_strprintf.c \
 	 float.c exact_float.c exact_float_integer.c exact_float_fraction.c \
 	 format_double.c format_exact_float.c format_e_exact_float.c \
 	 format_non_printable.c \
-	 pad_printable.c
+	 pad_printable.c \
+	 libft/*.c
 OBJS=ft_printf.o ft_strprintf.o \
 	 positional_args.o \
 	 printable.o \
@@ -23,7 +24,8 @@ OBJS=ft_printf.o ft_strprintf.o \
 	 float.o exact_float.o exact_float_integer.o exact_float_fraction.o \
 	 format_double.o format_exact_float.o format_e_exact_float.o \
 	 format_non_printable.o \
-	 pad_printable.o
+	 pad_printable.o \
+	 ft_*.o
 GCH=libftprintf.gch
 AR=ar rcs
 RM=rm -rf
