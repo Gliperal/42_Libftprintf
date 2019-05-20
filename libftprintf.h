@@ -6,13 +6,14 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 12:46:57 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 13:05:41 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
 # include "libft.h"
@@ -158,9 +159,5 @@ char			*pad_number(t_printable *p, const char *sign, const char *str);
 
 int				ft_printf(const char *format, ...);
 char			*ft_strprintf(const char *format, ...);
-
-// TODO Remove
-#include <unistd.h>
-#include <stdio.h>
 
 #endif

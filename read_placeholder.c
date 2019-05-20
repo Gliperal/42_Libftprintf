@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 13:53:15 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 13:11:44 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,15 @@ static char	pop_modifier(const char **format)
 		}
 		return (MOD_H);
 	}
-	else if (**format == 'l')
+	else if (**format != 'l')
+		return (0);
+	*format = *format + 1;
+	if (**format == 'l')
 	{
 		*format = *format + 1;
-		if (**format == 'l')
-		{
-			*format = *format + 1;
-			return (MOD_LL);
-		}
-		return (MOD_L);
+		return (MOD_LL);
 	}
-	return (0);
+	return (MOD_L);
 }
 
 int			read_placeholder(const char **format, t_list *printables)

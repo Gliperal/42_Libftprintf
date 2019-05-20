@@ -6,13 +6,11 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 12:32:18 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 13:02:57 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-// TODO Remove
-#include "testing.h"
 
 static int	write_printable(t_list *printable)
 {
@@ -82,7 +80,7 @@ static int	printf_main(const char *format, va_list ap)
 	return (chars_written);
 }
 
-int	ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list		ap;
 	int			result;
