@@ -1,6 +1,7 @@
 // TODO Remove this entire file.
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 void	put_printable(t_list *printable)
 {

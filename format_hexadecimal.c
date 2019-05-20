@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:26:27 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:37:50 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	format_hex_str(t_printable *p, char **hex, int uppercase)
 		if (!pad_left(hex, p->precision))
 			return (0);
 	}
-	if (p->flags & ALTFORM)
+	if (p->flags & ALTFORM && !ft_strequ(*hex, "0") && !ft_strequ(*hex, ""))
 		prefix = uppercase ? "0X" : "0x";
 	else
 		prefix = "";
@@ -101,6 +101,11 @@ char		*format_hexadecimal(t_printable *p)
 	size = byte_size(size_of_type(p->type, p->modifier));
 	uppercase = (p->type == 'X');
 	hex = value_to_hex(mem, size, uppercase);
+	if (ft_strequ(hex, "0") && p->precision == 0)
+	{
+		free(hex);
+		hex = ft_strdup("");
+	}
 	if (format_hex_str(p, &hex, uppercase))
 		return (hex);
 	else

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 15:42:18 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 13:11:44 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:28:51 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	pop_flags(const char **format)
 			flags = (flags | SIGNFORCE) & ~SIGNSPACE;
 		else if (**format == '\'')
 			flags |= DELIMITERS;
-		else
+		else if (**format != '0' && **format != ' ')
 			return (flags);
 		*format = *format + 1;
 	}

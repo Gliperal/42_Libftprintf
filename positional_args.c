@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:37:58 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:48:09 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	positional_args(t_list *printables)
 			return (-1);
 		printables = printables->next;
 	}
-	return (arg_style);
+	return (arg_style == 1);
 }

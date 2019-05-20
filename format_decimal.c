@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 14:47:29 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/19 14:24:39 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 16:22:27 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ char				*format_decimal(t_printable *p)
 	char		*tmp;
 
 	n = extract_data(p);
-	str = ft_itoa_base_u(ft_abs(n), "0123456789");
+	if (n == 0 && p->precision == 0)
+		str = ft_strdup("");
+	else
+		str = ft_itoa_base_u(ft_abs(n), "0123456789");
 	if (!str)
 		return (NULL);
 	if (p->precision != -1)

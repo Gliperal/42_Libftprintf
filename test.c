@@ -7,6 +7,8 @@
 
 void basic()
 {
+	ft_printf("Hello world.\n");
+	printf("Hello world.\n");
 	char *str = "42";
 	ft_printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
 	printf("|%c|%s|%p|%d|%i|%o|%u|%x|%X|%f|%%|\n", 'c', str, str, 42, 42, 42, 42, 42, 42, (double) 42);
@@ -375,7 +377,24 @@ void format_string()
 	ft_printf("[%+20.10ld]\n", 4242424242);
 	printf("[%+20.10ld]\n", 4242424242);
 
-	// Throw some special characters in the string that aren't part of a format argument
+//	ft_printf("[%?+20.10ld]\n", 4242424242);
+//	printf("[%?+20.10ld]\n", 4242424242);
+//	ft_printf("[%+?20.10ld]\n", 4242424242);
+//	printf("[%+?20.10ld]\n", 4242424242);
+//	ft_printf("[%+2?0.10ld]\n", 4242424242);
+//	printf("[%+2?0.10ld]\n", 4242424242);
+//	ft_printf("[%+20?.10ld]\n", 4242424242);
+//	printf("[%+20?.10ld]\n", 4242424242);
+//	ft_printf("[%+20.?10ld]\n", 4242424242);
+//	printf("[%+20.?10ld]\n", 4242424242);
+//	ft_printf("[%+20.1?0ld]\n", 4242424242);
+//	printf("[%+20.1?0ld]\n", 4242424242);
+//	ft_printf("[%+20.10?ld]\n", 4242424242);
+//	printf("[%+20.10?ld]\n", 4242424242);
+//	ft_printf("[%+20.10l?d]\n", 4242424242);
+//	printf("[%+20.10l?d]\n", 4242424242);
+//	ft_printf("[%+?-20.10ld]\n", 4242424242);
+//	printf("[%+?-20.10ld]\n", 4242424242);
 	// plus at the end of a number
 	// Some tests with no newline at the end
 }
@@ -936,7 +955,8 @@ int main()
 	char b[1];
 //	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 26, -1};
 //	int tests[] = {23, 24, 25, 27, -1};
-	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, -1};
+//	int tests[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, -1};
+	int tests[] = {0, -1};
 
 	for (int i = 0; tests[i] != -1; i++)
 	{
