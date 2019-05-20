@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 14:28:43 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/12 14:09:27 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:42:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*format_str(t_printable *p)
 		str = p->data;
 	else
 		str = *((char **)p->data);
+	if (!str)
+		return (ft_strdup("(null)"));
 	if (p->precision == -1)
 		str = ft_strdup(str);
 	else

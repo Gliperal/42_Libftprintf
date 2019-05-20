@@ -17,6 +17,8 @@ void basic()
 
 void character()
 {
+	ft_printf("%c\n", 0);
+	printf("%c\n", 0);
 	ft_printf("%c\n", 'A');
 	printf("%c\n", 'A');
 	ft_printf("%c\n", 'z');
@@ -41,6 +43,8 @@ void string()
 	char *empty = "";
 	ft_printf("Empty str%sing\n", empty);
 	printf("Empty str%sing\n", empty);
+	ft_printf("%s\n", NULL);
+	printf("%s\n", NULL);
 }
 
 

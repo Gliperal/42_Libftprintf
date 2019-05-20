@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:49:05 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 13:05:41 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:07:00 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft.h"
+# include "libft/libft.h"
 # include "argsize.h"
 # include "readers.h"
 # include "sizers.h"

@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:28:58 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 13:02:57 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:58:43 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	write_printable(t_list *printable)
 			if (str)
 			{
 				len = ft_strlen(str);
+				if (len == 0 && p->type == 'c')
+					write(1, str, 1);
 				write(1, str, len);
 				free(str);
 				return (len);
