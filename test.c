@@ -967,19 +967,4 @@ int main()
 		read(0, b, 1);
 		printf("\n");
 	}
-
-	ft_printf("B%.2c\n", NULL);
-	printf("B%.2c\n", NULL);
-	ft_printf("C%c\n", 0);
-	printf("C%c\n", 0);
-	ft_printf("D%2c\n", 0);
-	printf("D%2c\n", 0);
-	ft_printf("D%-2c.\n", 0);
-	printf("D%-2c.\n", 0);
-	ft_printf("D%4c\n", 0);
-	printf("D%4c\n", 0);
-	ft_printf("Enull %c and text\n", 0);
-	printf("Enull %c and text\n", 0);
-	ft_printf("F% c\n", 0);
-	printf("F% c\n", 0);
 }

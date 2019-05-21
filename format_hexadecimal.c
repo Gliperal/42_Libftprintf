@@ -6,7 +6,7 @@
 /*   By: nwhitlow <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 15:01:39 by nwhitlow          #+#    #+#             */
-/*   Updated: 2019/05/20 16:37:50 by nwhitlow         ###   ########.fr       */
+/*   Updated: 2019/05/20 19:20:05 by nwhitlow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	byte_size(ARGSIZE size)
 		return (sizeof(long));
 	if (size == SIZE_LONGLONG)
 		return (sizeof(long long));
-	return (0);
+	return (sizeof(int));
 }
 
 static char	hex_to_char(unsigned char c, int uppercase)
@@ -49,7 +49,7 @@ static char	*value_to_hex(char *ptr, int size, int uppercase)
 	{
 		c = ptr[i];
 		hex[2 * i] = hex_to_char(c & 0xf, uppercase);
-		hex[2 * i + 1] = hex_to_char(c >> 4, uppercase);
+		hex[2 * i + 1] = hex_to_char(c / 16, uppercase);
 		i++;
 	}
 	i = 2 * size - 1;
